@@ -1,0 +1,785 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"initialize",
+				"initialize_node_weights"
+			],
+			[
+				"clo",
+				"closest_strains"
+			],
+			[
+				"validate",
+				"validate_sequence_length"
+			],
+			[
+				"DNA",
+				"DNAAlphabet"
+			],
+			[
+				"IUPAC",
+				"IUPACUnambiguousDNA"
+			],
+			[
+				"add_aroa",
+				"add_aromatic_sulphur_interactions_"
+			],
+			[
+				"get",
+				"get_edges_by_bond_type"
+			],
+			[
+				"amino",
+				"amino_acids"
+			],
+			[
+				"one_",
+				"one_of_k_encoding"
+			],
+			[
+				"members",
+				"members_list"
+			],
+			[
+				"pass",
+				"passed_rejection_criteria"
+			],
+			[
+				"criteria",
+				"criteria_shannon_diversity"
+			],
+			[
+				"ass",
+				"assigned_members"
+			],
+			[
+				"resource",
+				"resource_owner_secret"
+			],
+			[
+				"consumer",
+				"consumer_secret"
+			],
+			[
+				"consumer_",
+				"consumer_key"
+			],
+			[
+				"consuemr",
+				"consumer_secret"
+			],
+			[
+				"d",
+				"d"
+			],
+			[
+				"subsam",
+				"subsample"
+			],
+			[
+				"get_",
+				"get_fragment_sequencing_primers"
+			],
+			[
+				"predecessor",
+				"predecessors"
+			],
+			[
+				"cython",
+				"cython_iterate_combinations"
+			],
+			[
+				"r",
+				"r"
+			],
+			[
+				"Prim",
+				"PrimerDesigner"
+			],
+			[
+				"chanl",
+				"channel_gate_below"
+			],
+			[
+				"interacting",
+				"interacting_atoms"
+			],
+			[
+				"getintera",
+				"get_interacting_resis"
+			],
+			[
+				"get_interacting",
+				"get_interacting_atoms"
+			],
+			[
+				"filter",
+				"filter_dataframe"
+			],
+			[
+				"int",
+				"int"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 49.0,
+		"last_filter": "python",
+		"selected_items":
+		[
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"markdown",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"check",
+				"Build With: Python - Syntax Check"
+			],
+			[
+				"package install",
+				"Package Control: Install Package"
+			],
+			[
+				"pandoc",
+				"Pandoc"
+			],
+			[
+				"pan",
+				"Pandoc"
+			],
+			[
+				"pando",
+				"Pandoc"
+			],
+			[
+				"package remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"academic",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"github",
+				"GitHub Flavored Markdown: Preview"
+			],
+			[
+				"open",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"pandoc pdf",
+				"Pandoc: Render Markdown to PDF"
+			],
+			[
+				"open file",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"package control install",
+				"Package Control: Install Package"
+			],
+			[
+				"pandp",
+				"Pandoc: Render Markdown to PDF"
+			],
+			[
+				"pandocp",
+				"Pandoc: Render Markdown to PDF"
+			],
+			[
+				"pandocpdf",
+				"Pandoc: Render Markdown to PDF"
+			],
+			[
+				"py",
+				"Set Syntax: Python"
+			],
+			[
+				"padnoc",
+				"Pandoc"
+			],
+			[
+				"package instal",
+				"Package Control: Install Package"
+			],
+			[
+				"package remove pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"package control",
+				"Preferences: Package Control Settings – Default"
+			],
+			[
+				"markdown slideshow",
+				"Markdown Slideshow"
+			],
+			[
+				"package rev",
+				"Package Control: Remove Package"
+			],
+			[
+				"evernote",
+				"Evernote: Send to Evernote as new note"
+			],
+			[
+				"p",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"unique",
+				"Permute Lines: Unique"
+			],
+			[
+				"reverse",
+				"Permute Lines: Reverse"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"shuffle",
+				"Permute Lines: Shuffle"
+			],
+			[
+				"text",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"academi",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"academicmark",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"glue",
+				"Glue - Launch"
+			],
+			[
+				"academic mark",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"pandoc ",
+				"Pandoc"
+			],
+			[
+				"markdown gfm",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"gfm",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"package insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Academic",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"Markdown",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"markdown light",
+				"Set Syntax: Markdown Light"
+			],
+			[
+				"markdown extende",
+				"Set Syntax: Markdown Extended"
+			],
+			[
+				"markdownlight",
+				"Set Syntax: Markdown Light"
+			],
+			[
+				"Editing",
+				"Preferences: MarkdownEditing Settings – Default"
+			],
+			[
+				"plain text",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"markdown editing",
+				"Preferences: MarkdownEditing Settings – Default"
+			]
+		],
+		"width": 391.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import pytest",
+			"py.test",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/ericmjl/Documents/github/graph-fingerprint",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint"
+	],
+	"file_history":
+	[
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
+		"/Users/ericmjl/Documents/github/flu-gibson-webui/app.py",
+		"/Users/ericmjl/Downloads/moreno_propro/README.moreno_propro",
+		"/Users/ericmjl/Documents/github/Network-Analysis-Made-Simple/environment.yml",
+		"/Users/ericmjl/Documents/github/flu-gibson/setup.py",
+		"/Users/ericmjl/Documents/github/Network-Analysis-Made-Simple/checkenv.py",
+		"/Users/ericmjl/Documents/github/flu-gibson-webui/app.",
+		"/Users/ericmjl/Documents/github/flu-gibson/README.md",
+		"/Users/ericmjl/Documents/github/flu-gibson-webui/templates/primers_old.html",
+		"/Users/ericmjl/Desktop/islam_hussein/downsample_by_year.py",
+		"/Users/ericmjl/Documents/github/flu-gibson-webui/templates/master.html",
+		"/Users/ericmjl/Documents/github/flu-gibson-webui/.gitignore",
+		"/Users/ericmjl/.ssh/config",
+		"/Users/ericmjl/Desktop/gui.py",
+		"/Users/ericmjl/Desktop/islam_hussein/closest_strains.txt",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/pin.py",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/test_pin.py",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/resi_atoms.py",
+		"/Users/ericmjl/Documents/github/flu-gibson/tests/test_primer_designer.py",
+		"/Users/ericmjl/Documents/github/flu-gibson/FluGibson/primer_designer.py",
+		"/Users/ericmjl/Documents/github/flu-gibson/tests/test_data/victoria_np.fasta",
+		"/Users/ericmjl/Documents/github/flu-gibson/FluGibson/nucleotide_converter.py",
+		"/Users/ericmjl/Documents/github/flu-gibson/tests/test_nucleotide_converter.py",
+		"/Users/ericmjl/Documents/github/flu-gibson/FluGibson/plasmids.py",
+		"/Users/ericmjl/Documents/github/flu-gibson/FluGibson/primer.py",
+		"/Users/ericmjl/Desktop/islam_hussein/remove_duplicates.py",
+		"/Users/ericmjl/Documents/github/neural-fingerprint/neuralfingerprint/mol_graph.py",
+		"/Users/ericmjl/Documents/github/neural-fingerprint/neuralfingerprint/build_convnet.py",
+		"/Users/ericmjl/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/ericmjl/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/utils.py",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/features.py",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/.git/hooks/pre-commit",
+		"/Volumes/ericmjl/computational_runs/20160309-hipath_h5-patristic_distances/HA_5.sh.e2357757",
+		"/Volumes/ericmjl/computational_runs/20160309-hipath_h5-patristic_distances/HA_master.sh.o2357751",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/test_data/2VIU.pdb",
+		"/Users/ericmjl/Desktop/hello.py",
+		"/Volumes/ericmjl/computational_runs/20160309-hipath_h5-patristic_distances/isolate_pds.py",
+		"/Users/ericmjl/Downloads/HA_tois.txt",
+		"/Users/ericmjl/Documents/github/influenza-global-reassortment/supp_data/viz/h1n1.html",
+		"/Users/ericmjl/Documents/github/influenza-global-reassortment/supp_data/viz/h1n1.js",
+		"/Users/ericmjl/Documents/github/influenza-global-reassortment/supp_data/viz/h7n9.html",
+		"/Users/ericmjl/Documents/github/influenza-global-reassortment/supp_data/viz/h7n9.js",
+		"/Users/ericmjl/Dropbox (Personal)/Church/MITCEF/small_group_divider/divide.py",
+		"/Users/ericmjl/Documents/github/neural-fingerprint/neuralfingerprint/features_aa.py",
+		"/Users/ericmjl/Documents/github/neural-fingerprint/neuralfingerprint/features.py",
+		"/Users/ericmjl/Library/Application Support/Sublime Text 3/Packages/User/Pandoc.sublime-settings",
+		"/Users/ericmjl/Dropbox (Personal)/Church/MITCEF/查经内容/IVP-NBC Luke 10.md",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/ain.py",
+		"/Users/ericmjl/Documents/pd_calc.py",
+		"/Users/ericmjl/Dropbox (Personal)/Church/MITCEF/small_group_divider/smallgroup.py",
+		"/Users/ericmjl/Dropbox (Personal)/Church/MITCEF/small_group_divider/member.py",
+		"/Users/ericmjl/Dropbox (Personal)/Church/MITCEF/small_group_divider/members.csv",
+		"/Users/ericmjl/Documents/github/influenza-global-reassortment/README.md",
+		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/03371f36-1e78-47ad-ab79-991cee74dec8/science/egypt/force_species.js",
+		"/Users/ericmjl/Dropbox (Personal)/CV, Resume/Resume.md",
+		"/Users/ericmjl/Desktop/merger.py",
+		"/Users/ericmjl/Google Drive/Bn10 polymerase project plan draft.md",
+		"/Users/ericmjl/Dropbox (Personal)/tiki_vids/bt_tracker/README.md",
+		"/Users/ericmjl/Documents/github/scikit-learn-tutorial/README.md",
+		"/Users/ericmjl/Dropbox (Personal)/tiki_vids/bt_tracker/20160127_bt6/data.txt",
+		"/Users/ericmjl/Dropbox (Personal)/tiki_vids/bt_tracker/20160127_bt1/data.txt",
+		"/Users/ericmjl/Dropbox (Personal)/tiki_vids/bt_tracker/20160127_bt8/data.txt",
+		"/Users/ericmjl/Dropbox (Personal)/tiki_vids/bt_tracker/20160128_bt8/data.txt",
+		"/Users/ericmjl/Dropbox (Personal)/tiki_vids/bt_tracker/20160128_bt6/data.txt",
+		"/Users/ericmjl/Documents/github/scikit-learn-tutorial/syllabus.md",
+		"/Users/ericmjl/Documents/github/scikit-learn-tutorial/faq.md",
+		"/Users/ericmjl/Downloads/dengue_and_zika_E.fasta",
+		"/Users/ericmjl/Documents/github/hiv-resistance-prediction/util/isoelectric_point.py",
+		"/Users/ericmjl/Documents/github/scikit-learn-tutorial/.gitignore",
+		"/Users/ericmjl/Documents/github/personal-fitness-data/copy_data.py",
+		"/Users/ericmjl/Documents/github/personal-fitness-data/initialize.py",
+		"/Users/ericmjl/Documents/github/personal-fitness-data/.gitignore",
+		"/Users/ericmjl/.bash_profile",
+		"/Users/ericmjl/.bash_",
+		"/Users/ericmjl/Documents/github/personal-fitness-data/copy.py",
+		"/Users/ericmjl/Documents/github/personal-fitness-data/gather_keys_cli.py",
+		"/Users/ericmjl/Documents/github/personal-fitness-data/gather_oauth2.py",
+		"/Users/ericmjl/Documents/github/hiv-resistance-prediction/util/custom_funcs.py",
+		"/Users/ericmjl/Documents/github/hiv-resistance-prediction/data/hiv-protease-sequences-expanded.fasta",
+		"/Users/ericmjl/Documents/github/software-carpentry/shell-novice/02-create.md",
+		"/Users/ericmjl/Documents/github/software-carpentry/shell-novice/02-create.",
+		"/Users/ericmjl/Downloads/sample.txt",
+		"/Users/ericmjl/Downloads/challenge/data-final/test-final.txt",
+		"/Users/ericmjl/Documents/github/picamera-auto/picam.py",
+		"/Users/ericmjl/Documents/github/tikicam-config/update_github.py",
+		"/Users/ericmjl/Documents/github/picamera-auto/capture_sequence.py",
+		"/Users/ericmjl/Documents/github/tikicam-config/superscript",
+		"/Users/ericmjl/Documents/github/tikicam-config/wpa_supplicant.conf",
+		"/Users/ericmjl/Documents/github/tikicam-config/remove_data.sh",
+		"/Users/ericmjl/Documents/github/tikicam-config/manual.md",
+		"/Users/ericmjl/Documents/github/tikicam-config/README.md",
+		"/Users/ericmjl/Desktop/wpa_supplicant.confg",
+		"/Users/ericmjl/Downloads/victoria.fasta",
+		"/Users/ericmjl/Documents/github/be-stats-iap2016/python-functions.md",
+		"/Users/ericmjl/Documents/github/reassortment-minto-life-history/Alaska_waterfowl_79viruses_seqs_20151223.fasta",
+		"/Volumes/FJTHUMB/license.key",
+		"/Users/ericmjl/Desktop/superscript",
+		"/Users/ericmjl/Desktop/interfaces",
+		"/Users/ericmjl/Desktop/wpa_supplicant.conf",
+		"/Users/ericmjl/Documents/github/hiv-resistance-prediction/isoelectric_point.py",
+		"/Users/ericmjl/Downloads/pybluez/setup.py",
+		"/etc/sudoers",
+		"/Users/ericmjl/Dropbox (Personal)/Downloads/lightblue-0.4/setup.py",
+		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/environment.yml",
+		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/Reticulate Evolution and Microbial Ecology.md",
+		"/Users/ericmjl/Documents/github/microblog/app/views.py",
+		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/README.md",
+		"/Users/ericmjl/Documents/github/hiveplot/README.md",
+		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/.gitignore",
+		"/Users/ericmjl/Dropbox (Personal)/blog_pypy-vs-python.md",
+		"/Users/ericmjl/Documents/github/pypy_stats/stats/binomial.py",
+		"/Users/ericmjl/Documents/github/pypy_stats/profile.py",
+		"/Users/ericmjl/Documents/github/pypy_stats/stats/bernoulli.py",
+		"/Users/ericmjl/Documents/github/pypy_stats/test.py",
+		"/Users/ericmjl/Dropbox (MIT)/The Dump/pypy-vs-python.md",
+		"/Users/ericmjl/Desktop/pypy-vs-python.md",
+		"/Users/ericmjl/Dropbox (MIT)/Systems Microbiology - phylogenetics + machine learning on HIV/outline.md",
+		"/Users/ericmjl/Desktop/pypy-pip",
+		"/Users/ericmjl/Documents/github/reassortment-simulator/.gitignore",
+		"/Users/ericmjl/Documents/github/reassortment-simulator/source/host.py",
+		"/Users/ericmjl/Documents/github/reassortment-simulator/source/virus.py",
+		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation_python.py",
+		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation.py",
+		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation",
+		"/Users/ericmjl/Documents/github/chameleon/game/player.py",
+		"/Users/ericmjl/Documents/github/chameleon/game/deck.py",
+		"/Users/ericmjl/Documents/github/chameleon/game/pile.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"softmax",
+			"neighbor",
+			"neighbor_activation",
+			"graph",
+			"np.",
+			"feature",
+			"arg",
+			"print",
+			"encode_bond_features",
+			"test_node_feature_array_length",
+			"test_bond",
+			"Delaunay",
+			"kind",
+			"Delaunay",
+			"delaunay",
+			"validate_sequence",
+			"primers",
+			"_backbone",
+			"_sequence",
+			"part_name",
+			"_part_name",
+			"part_name",
+			"design_assembly_primers",
+			"dw",
+			"up",
+			"downstream",
+			"upstream",
+			"design_assembly_primers",
+			"_fragment_sequencing_primers",
+			"list_part_ids",
+			"list",
+			"p.graph",
+			"self.graph",
+			"self.filename",
+			"design_assembly",
+			"array_rep_from_smiles",
+			"build_convnet_fingerprint_fun",
+			"degrees",
+			"get_ring_atoms_",
+			"test_add_ionic_interactions_",
+			"bonds_set",
+			"bonds",
+			"bond",
+			"lb",
+			".values[0]",
+			"CATION_RESIS",
+			"cation",
+			"ionic_resis",
+			"net.add",
+			"resiname",
+			"aromatic_resis",
+			"add_aromatic_sulphur_interactions_",
+			"aa",
+			"get_ring_centroids_",
+			"get_ring_atoms_",
+			"resi_rings_df",
+			"filter_dataframe",
+			"get_ring_atoms_",
+			"add_aromatic",
+			"add_hydrogen_bond_interactions_",
+			"net",
+			"get_edges_by_bond_type",
+			"get_edges_by_bond_type(net",
+			"ionic",
+			"aa",
+			"HYDROPHOBIC",
+			"hydrophobic",
+			"add_hydrophobic_interactions_",
+			"chain_id",
+			"filter_dataframe",
+			"add_hydrophobic_interactions_",
+			"taxa ",
+			"pin_graph",
+			"* ",
+			"window",
+			"text",
+			"Text",
+			"text",
+			"name",
+			"compute_primers",
+			"add_part",
+			"on_addpart_click",
+			"num_parts",
+			"onclick",
+			"self.",
+			"arg",
+			"root",
+			"AtomicInteractionNetwork",
+			"masterG",
+			"AtomicInteractionNetwork",
+			".add",
+			"group_sdi",
+			"arg",
+			"believer_guys",
+			"status",
+			"baptized",
+			"G.",
+			"d.x",
+			"d.type",
+			"d.weight",
+			"edge",
+			"nodecolorsub",
+			"nodecolorsubtype",
+			"nodecolor",
+			"linkcolor",
+			"isolation_date",
+			"coords",
+			",",
+			"\n",
+			"- ",
+			"C4:8f:EE",
+			"C4:5F:BE",
+			"\\",
+			"C4:5F:BE",
+			"https://www.evernote.com/shard/s3/nl/54511671/26bd011d-089d-4256-aa6d-8510cb870dc8/",
+			"C4:5F:BE",
+			"C4:5F",
+			"4156",
+			"train",
+			"' ",
+			"' S32'",
+			"camera.",
+			"datetime",
+			"|MP",
+			"_PB2",
+			"_PB1",
+			"_PA",
+			"_NS"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"- ",
+			"|M",
+			"|PB2",
+			"|PB1",
+			"|PA",
+			"|NS",
+			"|NP",
+			"|NA",
+			"|MP",
+			"|HA",
+			"	",
+			"    ",
+			"	",
+			", :Group, :Day sacrificed",
+			"	",
+			"_",
+			"	"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 124.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 136.0
+	},
+	"pinned_build_system": "",
+	"project": "graph-fingerprint.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"script_wr",
+				"/Volumes/ericmjl/20150923-PolymorphismSampler-polymerase-2010_to_2015/script_writer.py"
+			],
+			[
+				"script",
+				"~/Documents/github/polymorphism-sampler/script.py"
+			],
+			[
+				"sampl",
+				"~/Documents/github/polymorphism-sampler/sampler.py"
+			],
+			[
+				"readwrite",
+				"~/Documents/github/polymorphism-sampler/readwrite.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 221.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

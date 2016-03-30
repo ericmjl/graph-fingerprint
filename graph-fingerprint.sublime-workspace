@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"self",
+				"self_weights"
+			],
+			[
 				"initialize",
 				"initialize_node_weights"
 			],
@@ -144,9 +148,13 @@
 	"command_palette":
 	{
 		"height": 49.0,
-		"last_filter": "python",
+		"last_filter": "ython",
 		"selected_items":
 		[
+			[
+				"ython",
+				"Set Syntax: Python"
+			],
 			[
 				"python",
 				"Set Syntax: Python"
@@ -336,7 +344,7 @@
 				"Preferences: MarkdownEditing Settings – Default"
 			]
 		],
-		"width": 391.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -364,6 +372,10 @@
 	],
 	"file_history":
 	[
+		"/Users/ericmjl/Desktop/islam_hussein/downsample_by_year.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/utils.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
 		"/Users/ericmjl/Documents/github/flu-gibson-webui/app.py",
 		"/Users/ericmjl/Downloads/moreno_propro/README.moreno_propro",
@@ -373,7 +385,6 @@
 		"/Users/ericmjl/Documents/github/flu-gibson-webui/app.",
 		"/Users/ericmjl/Documents/github/flu-gibson/README.md",
 		"/Users/ericmjl/Documents/github/flu-gibson-webui/templates/primers_old.html",
-		"/Users/ericmjl/Desktop/islam_hussein/downsample_by_year.py",
 		"/Users/ericmjl/Documents/github/flu-gibson-webui/templates/master.html",
 		"/Users/ericmjl/Documents/github/flu-gibson-webui/.gitignore",
 		"/Users/ericmjl/.ssh/config",
@@ -488,10 +499,7 @@
 		"/Users/ericmjl/Documents/github/reassortment-simulator/source/virus.py",
 		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation_python.py",
 		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation.py",
-		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation",
-		"/Users/ericmjl/Documents/github/chameleon/game/player.py",
-		"/Users/ericmjl/Documents/github/chameleon/game/deck.py",
-		"/Users/ericmjl/Documents/github/chameleon/game/pile.py"
+		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation"
 	],
 	"find":
 	{
@@ -509,6 +517,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"OrderedDict",
+			"self.fingerprint",
+			"self.wb",
+			"set_weights",
+			"GraphConvolution",
+			"GraphConvNN",
+			".dot",
+			"check_graph",
+			"check",
+			"GraphConvNN",
+			"np.dot",
+			"self.vector_dims",
+			".ones",
+			"zeros",
+			"random.random",
 			"softmax",
 			"neighbor",
 			"neighbor_activation",
@@ -621,22 +644,7 @@
 			"- ",
 			"C4:8f:EE",
 			"C4:5F:BE",
-			"\\",
-			"C4:5F:BE",
-			"https://www.evernote.com/shard/s3/nl/54511671/26bd011d-089d-4256-aa6d-8510cb870dc8/",
-			"C4:5F:BE",
-			"C4:5F",
-			"4156",
-			"train",
-			"' ",
-			"' S32'",
-			"camera.",
-			"datetime",
-			"|MP",
-			"_PB2",
-			"_PB1",
-			"_PA",
-			"_NS"
+			"\\"
 		],
 		"highlight": true,
 		"in_selection": false,

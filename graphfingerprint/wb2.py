@@ -28,4 +28,4 @@ class WeightsAndBiases(dict):
         - name: (string) self_weights, nbr_weights, biases, or some other name.
         - shape: (tuple) the dimensions of the layer.
         """
-        self[name] = npr.normal(0, 0.1, shape)
+        self[name] = npr.normal(0, 0.01, shape)

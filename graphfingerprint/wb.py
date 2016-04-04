@@ -11,8 +11,21 @@ class WeightsAndBiases(dict):
         self.initialize_layers(n_layers, shapes)
         self.vect, self.unflattener = self.flattened()
 
-    def __iter__():
-        pass
+    def flattened(self):
+        flattened_weights, unflattener = flatten(self)
+
+        return flattened_weights, unflattener
+
+    def add(self, name, shape):
+        """
+        Add a layer to the WB class.
+
+        Parameters:
+        ===========
+        - name: (string) self_weights, nbr_weights, biases, or some other name.
+        - shape: (tuple) the dimensions of the layer.
+        """
+        self[name] = npr.normal(0, 1, shape)
 
     def initialize_layers(self, n_layers, shapes):
         """
@@ -28,19 +41,15 @@ class WeightsAndBiases(dict):
         for i in range(n_layers+1):
             self[i] = dict()
 
-            if i == 0:
+            if i != n_layers:
             # TODO: Change initialized values to center on 0.
-                self[i]['self_weights'] = npr.random((shapes[i], shapes[i]))
-                self[i]['nbr_weights'] = npr.random((shapes[i], shapes[i]))
-                self[i]['biases'] = npr.random((1, shapes[i]))
+                self[i]['self_weights'] = npr.normal(0, 0.1, (shapes[i], shapes[i+1]))
+                self[i]['nbr_weights'] = npr.normal(0, 0.1, (shapes[i], shapes[i+1]))
+                self[i]['biases'] = npr.normal(0, 0.1, (1, shapes[i+1]))
             else:
-                self[i]['self_weights'] = npr.random((shapes[i-1], shapes[i]))
-                self[i]['nbr_weights'] = npr.random((shapes[i-1], shapes[i]))
-                self[i]['biases'] = npr.random((1, shapes[i]))
+                self[i]['self_weights'] = npr.normal(0, 0.1, (shapes[i], shapes[i]))
+                self[i]['nbr_weights'] = npr.normal(0, 0.1, (shapes[i], shapes[i]))
+                self[i]['biases'] = npr.normal(0, 0.1, (1, shapes[i]))
 
-        self[n_layers]['linweights'] = npr.random((shapes[i], 1))
+        self[n_layers]['linweights'] = npr.normal(0, 0.1, (shapes[i], 1))
 
-    def flattened(self):
-        flattened_weights, unflattener = flatten(self)
-
-        return flattened_weights, unflattener

@@ -13,6 +13,7 @@ def softmax(X, axis=0):
     """
     return np.exp(X - logsumexp(X, axis=axis, keepdims=True))
 
+
 def relu(X, axis=0):
     return X * (X > 0)
 

@@ -21,7 +21,7 @@ print('Score of the graph:')
 print(cf.score_regressable(G))
 
 n_nodes = [i for i in range(2, len(all_nodes))]
-n_graphs = 10
+n_graphs = 100
 
 # Make all synthetic graphs
 graphs = [cf.make_random_graph(nodes=sample(all_nodes, choice(n_nodes)),
@@ -31,10 +31,10 @@ graphs = [cf.make_random_graph(nodes=sample(all_nodes, choice(n_nodes)),
 
 input_shape = (1, 10)
 
-layers = [GraphConvLayer(kernel_shape=(10, 20)),
+layers = [# GraphConvLayer(kernel_shape=(10, 20)),
           # GraphConvLayer(kernel_shape=(20, 20)),
-          GraphConvLayer(kernel_shape=(20, 10)),
-          # GraphConvLayer(kernel_shape=(10, 10)),
+          # GraphConvLayer(kernel_shape=(20, 10)),
+          GraphConvLayer(kernel_shape=(10, 10)),
           FingerprintLayer(10),
           LinearRegressionLayer(shape=(10, 1))]
 print(layers)
@@ -89,10 +89,11 @@ wb_vect, wb_unflattener = wb_all.flattened()
 def sgd(gradfunc, wb_vect, wb_unflattener, layers, graphs,
         num_iters=200, step_size=0.1, mass=0.9, batch=False, batch_size=10):
     """
-    Stochastic gradient descent with momentum.
+    Batch stochastic gradient descent with momentum.
     """
 
     velocity = np.zeros(len(wb_vect))
+    # wb_record = np.zeros(shape=(num_iters, len(wb_vect)))
 
     training_losses = []
     for i in range(num_iters):
@@ -121,12 +122,15 @@ def sgd(gradfunc, wb_vect, wb_unflattener, layers, graphs,
         print('Time: {0}'.format(end - start))
         print('')
 
+        step_size = step_size * (1 - step_size)
+
+        print('Step size: {0}'.format(step_size))
     plt.plot(training_losses)
     plt.show()
     # return wb_vect, wb_unflattener
 
 sgd(gradfunc, wb_vect, wb_unflattener, layers, graphs,
-    num_iters=200, step_size=0.001, batch=False, batch_size=10)
+    num_iters=1000, step_size=0.0001, batch=True, batch_size=10)
 
 inputs = GraphInputLayer(input_shape).forward_pass(graphs)
 # print(predict(wb_vect, wb_unflattener, inputs, layers, graphs))

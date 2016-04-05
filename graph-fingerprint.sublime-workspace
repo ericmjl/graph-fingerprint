@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"output",
+				"output_shape"
+			],
+			[
+				"Weights",
+				"WeightsAndBiases"
+			],
+			[
+				"Graph",
+				"GraphFingerprint"
+			],
+			[
+				"acta",
+				"act_a0"
+			],
+			[
+				"A",
+				"A"
+			],
+			[
+				"split",
+				"split_ixs"
+			],
+			[
+				"cur_",
+				"cur_flattened"
+			],
+			[
+				"un",
+				"unflatteners"
+			],
+			[
 				"self",
 				"self_weights"
 			],
@@ -148,15 +180,15 @@
 	"command_palette":
 	{
 		"height": 49.0,
-		"last_filter": "ython",
+		"last_filter": "python",
 		"selected_items":
 		[
 			[
-				"ython",
+				"python",
 				"Set Syntax: Python"
 			],
 			[
-				"python",
+				"ython",
 				"Set Syntax: Python"
 			],
 			[
@@ -372,11 +404,25 @@
 	],
 	"file_history":
 	[
-		"/Users/ericmjl/Desktop/islam_hussein/downsample_by_year.py",
+		"/Users/ericmjl/Documents/github/microblog/environment.yml",
+		"/Users/ericmjl/Documents/github/neural-fingerprint/examples/regression.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint_vect.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/graph_fingerprint.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb2.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/utils.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
+		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/Research Statement/index.html",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/fingerprint_vect.py",
+		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/test_pin.py",
+		"/Users/ericmjl/Documents/github/autograd/examples/optimizers.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/test_flatten.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/test_fingerprint.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/flatten.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graph-fingerprint.sublime-workspace",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fp.py",
+		"/Users/ericmjl/Desktop/islam_hussein/downsample_by_year.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/utils.py",
 		"/Users/ericmjl/Documents/github/flu-gibson-webui/app.py",
 		"/Users/ericmjl/Downloads/moreno_propro/README.moreno_propro",
 		"/Users/ericmjl/Documents/github/Network-Analysis-Made-Simple/environment.yml",
@@ -391,7 +437,6 @@
 		"/Users/ericmjl/Desktop/gui.py",
 		"/Users/ericmjl/Desktop/islam_hussein/closest_strains.txt",
 		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/pin.py",
-		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/test_pin.py",
 		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/resi_atoms.py",
 		"/Users/ericmjl/Documents/github/flu-gibson/tests/test_primer_designer.py",
 		"/Users/ericmjl/Documents/github/flu-gibson/FluGibson/primer_designer.py",
@@ -486,20 +531,7 @@
 		"/Users/ericmjl/Documents/github/hiveplot/README.md",
 		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/.gitignore",
 		"/Users/ericmjl/Dropbox (Personal)/blog_pypy-vs-python.md",
-		"/Users/ericmjl/Documents/github/pypy_stats/stats/binomial.py",
-		"/Users/ericmjl/Documents/github/pypy_stats/profile.py",
-		"/Users/ericmjl/Documents/github/pypy_stats/stats/bernoulli.py",
-		"/Users/ericmjl/Documents/github/pypy_stats/test.py",
-		"/Users/ericmjl/Dropbox (MIT)/The Dump/pypy-vs-python.md",
-		"/Users/ericmjl/Desktop/pypy-vs-python.md",
-		"/Users/ericmjl/Dropbox (MIT)/Systems Microbiology - phylogenetics + machine learning on HIV/outline.md",
-		"/Users/ericmjl/Desktop/pypy-pip",
-		"/Users/ericmjl/Documents/github/reassortment-simulator/.gitignore",
-		"/Users/ericmjl/Documents/github/reassortment-simulator/source/host.py",
-		"/Users/ericmjl/Documents/github/reassortment-simulator/source/virus.py",
-		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation_python.py",
-		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation.py",
-		"/Users/ericmjl/Documents/github/reassortment-simulator/simulation"
+		"/Users/ericmjl/Documents/github/pypy_stats/stats/binomial.py"
 	],
 	"find":
 	{
@@ -517,6 +549,37 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"print",
+			"forward",
+			"params",
+			"npr.random",
+			"np.stack",
+			".stack",
+			"shape=)",
+			"shape=",
+			"bias",
+			"self.graphs",
+			"se.flgraphs",
+			"activations_dict",
+			"kind",
+			"quick_grad_check",
+			"convolve",
+			"npr.random",
+			"graphs",
+			"GraphFingerprints",
+			"Graph",
+			"graph",
+			"arg",
+			"softmax",
+			"act_a",
+			"act_a0",
+			"nodes",
+			"'A'",
+			"np.random",
+			"unflatteners",
+			"self.wb",
+			"arg",
+			"wb[",
 			"OrderedDict",
 			"self.fingerprint",
 			"self.wb",
@@ -613,38 +676,7 @@
 			"name",
 			"compute_primers",
 			"add_part",
-			"on_addpart_click",
-			"num_parts",
-			"onclick",
-			"self.",
-			"arg",
-			"root",
-			"AtomicInteractionNetwork",
-			"masterG",
-			"AtomicInteractionNetwork",
-			".add",
-			"group_sdi",
-			"arg",
-			"believer_guys",
-			"status",
-			"baptized",
-			"G.",
-			"d.x",
-			"d.type",
-			"d.weight",
-			"edge",
-			"nodecolorsub",
-			"nodecolorsubtype",
-			"nodecolor",
-			"linkcolor",
-			"isolation_date",
-			"coords",
-			",",
-			"\n",
-			"- ",
-			"C4:8f:EE",
-			"C4:5F:BE",
-			"\\"
+			"on_addpart_click"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -785,7 +817,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 221.0,
+	"side_bar_width": 182.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

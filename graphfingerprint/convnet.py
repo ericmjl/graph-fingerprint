@@ -4,6 +4,8 @@ from autograd.scipy.misc import logsumexp
 from collections import defaultdict
 from time import time
 
+import pandas as pd
+
 def relu(x):
     """
     Rectified Linear Unit
@@ -55,7 +57,6 @@ class GraphInputLayer(object):
                 nbr_idxs[g.node[n]['idx']] = nbrs
         return node_idxs, nbr_idxs, graph_idxs
 
-
     def forward_pass(self, graphs):
         """
         Returns the nodes' features stacked together.
@@ -101,15 +102,14 @@ class GraphConvLayer(object):
     def __repr__(self):
         return "GraphConvLayer"
 
-
-    def forward_pass(self, wb, inputs, node_indices, nbr_indices, graph_indices):
+    def forward_pass(self, wb, inputs, graphs):
         """
         Parameters:
         ===========
         - inputs: (np.array) the output from the previous layer.
         - graphs: (list) of nx.Graph objects.
         """
-        def stacked_neighbor_activations(inputs, nbr_indices):
+        def stacked_neighbor_activations(inputs, graphs):
             """
             Inputs:
             =======
@@ -120,46 +120,45 @@ class GraphConvLayer(object):
             ========
             - a stacked numpy array of neighbor activations
             """
-            start = time()
             nbr_activations = []
             # print('Number of nbr_indices: {0}'.format(len(nbr_indices)))
-            for n, nbrs in nbr_indices.items():
-                # print('Number of neighbors: {0}'.format(len(nbrs)))
-                nbr_acts = np.sum(inputs[nbrs], axis=0)
-                nbr_activations.extend([nbr_acts])
-            end = time()
-            # print('GraphConvLayer fw pass time: {0}s'.format(end - start))
-            # print(np.vstack(nbr_activations))
+            # for n, nbrs in nbr_indices.items():
+            for g in graphs:
+                for n in g.nodes():
+                    nbr_acts = neighbor_activations(g, n, inputs)
+                    nbr_activations.append(nbr_acts)
+
             return np.vstack(nbr_activations)
 
-        # def neighbor_indices(G, n):
-        #     """
-        #     Inputs:
-        #     =======
-        #     - G: the graph to which the node belongs to.
-        #     - n: the node inside the graph G.
-        #
-        #     Returns:
-        #     ========
-        #     - indices: (list) a list of indices, which should (but is not
-        #                guaranteed to) correspond to a row in a large
-        #                stacked matrix of features.
-        #     """
-        #     indices = []
-        #     for n in G.neighbors(n):
-        #         indices.append(G.node[n]['idx'])
-        #     return indices
+        def neighbor_indices(G, n):
+            """
+            Inputs:
+            =======
+            - G: the graph to which the node belongs to.
+            - n: the node inside the graph G.
 
-        # def neighbor_activations(G, n, inputs):
-        #     """
-        #     Inputs:
-        #     =======
-        #     - G: the graph to which the node belongs to.
-        #     - n: the node inside the graph G
-        #     - inputs: the outputs from the previous layer.
-        #     """
-        #     nbr_indices = neighbor_indices(G, n)
-        #     return np.sum(inputs[nbr_indices], axis=0)
+            Returns:
+            ========
+            - indices: (list) a list of indices, which should (but is not
+                       guaranteed to) correspond to a row in a large
+                       stacked matrix of features.
+            """
+            indices = []
+            for n in G.neighbors(n):
+                indices.append(G.node[n]['idx'])
+            return indices
+
+        def neighbor_activations(G, n, inputs):
+            """
+            Inputs:
+            =======
+            - G: the graph to which the node belongs to.
+            - n: the node inside the graph G
+            - inputs: the outputs from the previous layer.
+            """
+            nbr_indices = neighbor_indices(G, n)
+            # print(nbr_indices)
+            return np.sum(inputs[nbr_indices], axis=0)
 
         self_weights = wb['self_weights']
         nbr_weights = wb['nbr_weights']
@@ -167,7 +166,7 @@ class GraphConvLayer(object):
 
         self_act = np.dot(inputs, self_weights)
         # sna_vect = np.vectorize(stacked_neighbor_activations)
-        nbr_act = np.dot(stacked_neighbor_activations(inputs, nbr_indices),
+        nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
                          nbr_weights)
         # print('Computing activations...')
         return relu(self_act + nbr_act + biases)
@@ -207,7 +206,7 @@ class FingerprintLayer(object):
     def __repr__(self):
         return "FingerprintLayer"
 
-    def forward_pass(self, wb, inputs, node_indices, nbr_indices, graph_indices):
+    def forward_pass(self, wb, inputs, graphs):
         """
         Parameters:
         ===========
@@ -216,18 +215,18 @@ class FingerprintLayer(object):
         - graphs: (list of nx.Graphs)
         """
 
-        # def graph_indices(g):
-        #     """
-        #     Returns the row indices of each of the nodes in the graphs.
-        #     """
-        #     return [d['idx'] for _, d in g.nodes(data=True)]
+        def graph_indices(g):
+            """
+            Returns the row indices of each of the nodes in the graphs.
+            """
+            return [d['idx'] for _, d in g.nodes(data=True)]
 
         fingerprints = []
-        for g, idxs in graph_indices.items():
+        for g in graphs:
+            idxs = graph_indices(g)
             fp = np.sum(inputs[idxs], axis=0)
             fingerprints.append(fp)
 
-        # print(softmax(relu(np.vstack(fingerprints)), axis=1))
         return softmax(relu(np.vstack(fingerprints)), axis=1)
 
     def build_weights(self, input_shape):
@@ -253,8 +252,7 @@ class LinearRegressionLayer(object):
     def __repr__(self):
         return "LinearRegressionLayer"
 
-    def forward_pass(self, wb, inputs, node_indices, nbr_indices, graph_indices):
-
+    def forward_pass(self, wb, inputs, graphs):
         return np.dot(inputs, wb['linweights']) + wb['bias']
 
     def build_weights(self, input_shape):

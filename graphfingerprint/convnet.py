@@ -115,14 +115,13 @@ class GraphConvLayer(object):
             =======
             - graphs: (list) a list of NetworkX graphs.
             - inputs: (np.array) the inputs from the previous layer.
-            
+
             Returns:
             ========
             - a stacked numpy array of neighbor activations
             """
             nbr_activations = []
-            # print('Number of nbr_indices: {0}'.format(len(nbr_indices)))
-            # for n, nbrs in nbr_indices.items():
+
             for g in graphs:
                 for n in g.nodes():
                     nbr_acts = neighbor_activations(g, n, inputs)
@@ -227,7 +226,7 @@ class FingerprintLayer(object):
             fp = np.sum(inputs[idxs], axis=0)
             fingerprints.append(fp)
 
-        return softmax(relu(np.vstack(fingerprints)), axis=1)
+        return relu(np.vstack(fingerprints))
 
     def build_weights(self, input_shape):
         """
@@ -237,6 +236,30 @@ class FingerprintLayer(object):
         self.wb.add('weights', shape=(input_shape[0], self.shape))
 
         output_shape = (input_shape[0], self.shape)
+
+        return output_shape, self.wb
+
+
+class FullyConnectedLayer(object):
+    """
+    A fully connected layer.
+    """
+
+    def __init__(self, shape):
+        self.shape = shape
+        self.wb = WeightsAndBiases()
+
+    def __repr__(self):
+        return "FullyConnectedLayer"
+
+    def forward_pass(self, wb, inputs, graphs):
+        return relu(np.dot(inputs, wb['weights']) + wb['bias'])
+
+    def build_weights(self, input_shape):
+        self.wb.add('weights', shape=self.shape)
+        output_shape = (input_shape[0], self.shape[1])
+
+        self.wb.add('bias', shape=output_shape)
 
         return output_shape, self.wb
 

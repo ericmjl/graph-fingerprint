@@ -1,5 +1,6 @@
 import networkx as nx
 import math
+import autograd.numpy as np
 from random import sample
 
 
@@ -26,7 +27,7 @@ def score(g):
     return len(g.nodes())
 
 
-def score_regressable(G):
+def score_sqrt(G):
     """
     The regressable score for each graph will be the sum of the
     (square root of each node + the sum of its neighbors.)
@@ -39,6 +40,21 @@ def score_regressable(G):
             sum_score += nbr
     return sum_score
 
+
+def score_sum(G):
+    """
+    This is the sum of nodes.
+    """
+    return sum([n for n in G.nodes()])
+
+
+def score_random(G):
+    """
+    Returns a random number between 0 and 10 for the score. This is meant to
+    be a null learning task, where the weights and biases should never
+    converge.
+    """
+    return np.random.randint(0, 10)
 
 def get_graph_idxs(graphs):
     """

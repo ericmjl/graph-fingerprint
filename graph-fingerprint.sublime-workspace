@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"samp_",
+				"samp_graphs"
+			],
+			[
 				"output",
 				"output_shape"
 			],
@@ -404,6 +408,12 @@
 	],
 	"file_history":
 	[
+		"/Users/ericmjl/Dropbox (MIT)/Share_with_Eric/H5N2_analysis/Global_trees/JR_AR_taxa.txt",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/custom_funcs.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/graph_fp_layered.py",
+		"/Users/ericmjl/Documents/github/autograd/examples/convnet.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/flatten.py",
 		"/Users/ericmjl/Documents/github/microblog/environment.yml",
 		"/Users/ericmjl/Documents/github/neural-fingerprint/examples/regression.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint_vect.py",
@@ -411,14 +421,12 @@
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb2.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
 		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/Research Statement/index.html",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/fingerprint_vect.py",
 		"/Users/ericmjl/Documents/github/protein-interaction-network/pin/test_pin.py",
 		"/Users/ericmjl/Documents/github/autograd/examples/optimizers.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/test_flatten.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/test_fingerprint.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/flatten.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graph-fingerprint.sublime-workspace",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fp.py",
 		"/Users/ericmjl/Desktop/islam_hussein/downsample_by_year.py",
@@ -527,11 +535,7 @@
 		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/environment.yml",
 		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/Reticulate Evolution and Microbial Ecology.md",
 		"/Users/ericmjl/Documents/github/microblog/app/views.py",
-		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/README.md",
-		"/Users/ericmjl/Documents/github/hiveplot/README.md",
-		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/.gitignore",
-		"/Users/ericmjl/Dropbox (Personal)/blog_pypy-vs-python.md",
-		"/Users/ericmjl/Documents/github/pypy_stats/stats/binomial.py"
+		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/README.md"
 	],
 	"find":
 	{
@@ -549,6 +553,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"cf.score",
+			"wb_old",
+			"print",
+			"idxs",
+			"inputs",
+			"graph_scores",
+			"forward_",
+			"forward_pass",
+			"sampled_inputs",
+			"inputs",
+			"make_random",
+			"score(g)",
 			"print",
 			"forward",
 			"params",
@@ -664,19 +680,7 @@
 			"hydrophobic",
 			"add_hydrophobic_interactions_",
 			"chain_id",
-			"filter_dataframe",
-			"add_hydrophobic_interactions_",
-			"taxa ",
-			"pin_graph",
-			"* ",
-			"window",
-			"text",
-			"Text",
-			"text",
-			"name",
-			"compute_primers",
-			"add_part",
-			"on_addpart_click"
+			"filter_dataframe"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -817,7 +821,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 182.0,
+	"side_bar_width": 216.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

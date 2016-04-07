@@ -1,3 +1,11 @@
+"""
+Authors:
+- David Duvenaud
+- Matt Johnson
+- Dougal Maclaurin
+- Eric J. Ma
+"""
+
 from autograd.core import getval
 import autograd.numpy as np
 

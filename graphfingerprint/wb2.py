@@ -13,6 +13,9 @@ class WeightsAndBiases(dict):
         pass
 
     def flattened(self):
+        """
+        Deprecated. Don't bother with this.
+        """
         flattened_weights, unflattener = flatten(self)
         self.vect = flattened_weights
         self.unflattener = unflattener

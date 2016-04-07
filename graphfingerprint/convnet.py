@@ -2,9 +2,7 @@ from autograd import numpy as np
 from wb2 import WeightsAndBiases
 from autograd.scipy.misc import logsumexp
 from collections import defaultdict
-from time import time
-
-import pandas as pd
+from custom_funcs import graph_indices
 
 def relu(x):
     """
@@ -61,7 +59,6 @@ class GraphInputLayer(object):
         """
         Returns the nodes' features stacked together.
         """
-        start = time()
         features = []
         i = 0
         for g in graphs:
@@ -69,8 +66,7 @@ class GraphInputLayer(object):
                 features.append(d['features'])
                 g.node[n]['idx'] = i
                 i += 1
-        end = time()
-        print('Input layer fw pass time: {0}s'.format(end - start))
+
         return np.vstack(features)
 
     def build_weights(self, input_shape):
@@ -214,12 +210,6 @@ class FingerprintLayer(object):
         - graphs: (list of nx.Graphs)
         """
 
-        def graph_indices(g):
-            """
-            Returns the row indices of each of the nodes in the graphs.
-            """
-            return [d['idx'] for _, d in g.nodes(data=True)]
-
         fingerprints = []
         for g in graphs:
             idxs = graph_indices(g)
@@ -240,6 +230,47 @@ class FingerprintLayer(object):
         return output_shape, self.wb
 
 
+class MaxPoolLayer(object):
+    """
+    A maxpool layer.
+    """
+
+    def __init__(self):
+        # self.shape = shape
+        self.wb = WeightsAndBiases()
+
+    def __repr__(self):
+        return "MaxPoolLayer"
+
+    def forward_pass(self, wb, inputs, graphs):
+        """
+        For each node and its neighbors, identify the node that has the
+        maximum sum of features to be designated as their representative.
+        """
+
+        outputs = np.zeros(shape=inputs.shape)
+        for g in graphs:
+            # g_idxs = graph_indices(g)
+            for n, d in g.nodes(data=True):
+                sum_feat = np.sum(d['features'])
+                # max_idx = g.node[n]['idx']
+                idxs = [d['idx']]
+                for nbr in g.neighbors(n):
+                    nbr_idx = g.node[nbr]['idx']
+                    idxs.append(nbr_idx)
+                    nbr_sumfeat = np.sum(g.node[nbr]['features'])
+                    if nbr_sumfeat > sum_feat:
+                        sum_feat = nbr_sumfeat
+                        # max_idx = nbr_idx
+                outputs[idxs] = sum_feat
+
+        return relu(outputs)
+
+    def build_weights(self, input_shape):
+        self.wb.add('weights', shape=input_shape)
+        return input_shape, self.wb
+
+
 class FullyConnectedLayer(object):
     """
     A fully connected layer.
@@ -258,7 +289,6 @@ class FullyConnectedLayer(object):
     def build_weights(self, input_shape):
         self.wb.add('weights', shape=self.shape)
         output_shape = (input_shape[0], self.shape[1])
-
         self.wb.add('bias', shape=output_shape)
 
         return output_shape, self.wb

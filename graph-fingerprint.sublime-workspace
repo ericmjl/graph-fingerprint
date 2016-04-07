@@ -408,10 +408,12 @@
 	],
 	"file_history":
 	[
-		"/Users/ericmjl/Dropbox (MIT)/Share_with_Eric/H5N2_analysis/Global_trees/JR_AR_taxa.txt",
+		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/The back-story to our publication on influenza reassortment, and lessons learned/index.html",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/custom_funcs.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb2.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/graph_fp_layered.py",
+		"/Users/ericmjl/Dropbox (MIT)/Share_with_Eric/H5N2_analysis/Global_trees/JR_AR_taxa.txt",
 		"/Users/ericmjl/Documents/github/autograd/examples/convnet.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/flatten.py",
 		"/Users/ericmjl/Documents/github/microblog/environment.yml",
@@ -419,7 +421,6 @@
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint_vect.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/graph_fingerprint.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb2.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb.py",
 		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/Research Statement/index.html",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/fingerprint_vect.py",
@@ -534,8 +535,7 @@
 		"/Users/ericmjl/Dropbox (Personal)/Downloads/lightblue-0.4/setup.py",
 		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/environment.yml",
 		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/Reticulate Evolution and Microbial Ecology.md",
-		"/Users/ericmjl/Documents/github/microblog/app/views.py",
-		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/README.md"
+		"/Users/ericmjl/Documents/github/microblog/app/views.py"
 	],
 	"find":
 	{
@@ -553,6 +553,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"score_fun",
+			"cf.score_sqrt",
+			"score_sum",
+			"cf.score_sqrt",
+			"softmax",
+			"cf.score_sum",
+			".flatten",
+			"['idx']",
+			"idx",
+			"train_loss",
+			"score_random",
+			"cf.score_sum",
+			"cf.score",
+			"score_regressable",
 			"cf.score",
 			"wb_old",
 			"print",
@@ -666,21 +680,7 @@
 			"aa",
 			"get_ring_centroids_",
 			"get_ring_atoms_",
-			"resi_rings_df",
-			"filter_dataframe",
-			"get_ring_atoms_",
-			"add_aromatic",
-			"add_hydrogen_bond_interactions_",
-			"net",
-			"get_edges_by_bond_type",
-			"get_edges_by_bond_type(net",
-			"ionic",
-			"aa",
-			"HYDROPHOBIC",
-			"hydrophobic",
-			"add_hydrophobic_interactions_",
-			"chain_id",
-			"filter_dataframe"
+			"resi_rings_df"
 		],
 		"highlight": true,
 		"in_selection": false,

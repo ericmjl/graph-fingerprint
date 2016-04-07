@@ -30,14 +30,28 @@ def score(g):
 def score_sqrt(G):
     """
     The regressable score for each graph will be the sum of the
-    (square root of each node + the sum of its neighbors.)
+    (square root of each node + its neighbors.)
     """
     sum_score = 0
     for n, d in G.nodes(data=True):
         sum_score += math.sqrt(n)
 
         for nbr in G.neighbors(n):
+            sum_score += math.sqrt(nbr)
+    return sum_score
+
+
+def score_nbr(G):
+    """
+    This regression score is the sum of itself + neighbors.
+    """
+    sum_score = 0
+    for n, d in G.nodes(data=True):
+        sum_score += n
+
+        for nbr in G.neighbors(n):
             sum_score += nbr
+
     return sum_score
 
 
@@ -56,12 +70,32 @@ def score_random(G):
     """
     return np.random.randint(0, 10)
 
+
+def score_edges(G):
+    """
+    Pinpoints certain edges as being important.
+    """
+    important_edges = [(1, 2), (2, 5), (3, 4)]
+
+    score = 0
+    for edge in important_edges:
+        if G.has_edge(*edge):
+            score += sum(edge)
+    return score
+
+
 def get_graph_idxs(graphs):
     """
     Given a list of graphs, returns a list of row indices stored on each graph.
     """
     idxs = []
     for g in graphs:
-        for n, d in g.nodes(data=True):
-            idxs.extend(d['idx'])
+        idxs.exend(graph_indices(g))
     return idxs
+
+
+def graph_indices(g):
+    """
+    Returns the row indices of each of the nodes in the graphs.
+    """
+    return [d['idx'] for _, d in g.nodes(data=True)]

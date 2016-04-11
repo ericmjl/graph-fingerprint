@@ -13,14 +13,16 @@ from autograd.util import check_grads
 from flatten import flatten
 # from optimizers import sgd
 
-all_nodes = [i for i in range(10)]
+n_feats = 6
+all_nodes = [i for i in range(n_feats)]
 lb = LabelBinarizer()
 features_dict = {i: lb.fit_transform(all_nodes)[i] for i in all_nodes}
 
-G = cf.make_random_graph(sample(all_nodes, 6), 5, features_dict)
-G.edges(data=True)
+G = cf.make_random_graph(sample(all_nodes, n_feats-1), n_feats-2,
+                         features_dict)
+print(G.nodes(data=True))
 
-score_func = cf.score_edges
+score_func = cf.score_sine
 
 print('Score of the graph:')
 print(score_func(G))
@@ -36,15 +38,15 @@ graphs = [cf.make_random_graph(nodes=sample(all_nodes, choice(n_nodes)),
 
 input_shape = (1, 10)
 
-layers = [# GraphConvLayer(kernel_shape=(10, 10)),
+layers = [# GraphConvLayer(kernel_shape=(n_feats, 2*n_feats)),
           # GraphConvLayer(kernel_shape=(20, 20)),
-          # GraphConvLayer(kernel_shape=(20, 10)),
-          GraphConvLayer(kernel_shape=(10, 10)),
+          # GraphConvLayer(kernel_shape=(2*n_feats, n_feats)),
+          GraphConvLayer(kernel_shape=(n_feats, n_feats)),
           # MaxPoolLayer(),
-          FingerprintLayer(10),
+          FingerprintLayer(n_feats),
           # FullyConnectedLayer((10, 10)),
-          FullyConnectedLayer((10, 1)),
-          # LinearRegressionLayer(shape=(10, 1)),
+          # FullyConnectedLayer((10, 1)),
+          LinearRegressionLayer(shape=(n_feats, 1)),
           ]
 print(layers)
 
@@ -120,7 +122,7 @@ def callback(wb, inputs, layers, graphs, i):
 
 def sgd(gradfunc, wb, layers, graphs, callback=None,
         num_iters=200, step_size=0.1, mass=0.9, batch=False,
-        batch_size=10):
+        batch_size=10, adaptive=False):
     """
     Batch stochastic gradient descent with momentum.
 
@@ -144,7 +146,8 @@ def sgd(gradfunc, wb, layers, graphs, callback=None,
         g = gradfunc(wb_vect, wb_unflattener, samp_inputs, layers, samp_graphs)
         velocity = mass * velocity - (1.0 - mass) * g
         wb_vect += step_size * velocity
-        step_size = step_size / (1 / (1 - step_size))
+        if adaptive:
+            step_size = step_size * (1 - step_size)
 
         # Diagnostic statements.
         wb = wb_unflattener(wb_vect)
@@ -160,8 +163,8 @@ def sgd(gradfunc, wb, layers, graphs, callback=None,
 wb_all = initialize_network(input_shape, layers, graphs)
 
 wb_vect, wb_unflattener = sgd(gradfunc, wb_all, layers, graphs,
-                              callback=callback, num_iters=1000, step_size=0.1,
-                              batch=True, batch_size=20)
+                              callback=callback, num_iters=2000, step_size=0.1,
+                              batch=True, batch_size=20, adaptive=True)
 
 
 inputs = GraphInputLayer(input_shape).forward_pass(graphs)

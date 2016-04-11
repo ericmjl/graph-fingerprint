@@ -84,6 +84,20 @@ def score_edges(G):
     return score
 
 
+def score_sine(G):
+    """
+    Takes advantage of the non-linear "sine" function.
+    Structure similar to score_nbr, but applies sine function at each addition.
+    """
+    sum_score = 0
+    for n in G.nodes():
+        sum_score += np.sin(n)
+        for nbr in G.neighbors(n):
+            sum_score += np.sin(nbr)
+
+    return sum_score
+
+
 def get_graph_idxs(graphs):
     """
     Given a list of graphs, returns a list of row indices stored on each graph.

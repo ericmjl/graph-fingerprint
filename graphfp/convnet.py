@@ -155,14 +155,12 @@ class GraphConvLayer(object):
             # print(nbr_indices)
             return np.sum(inputs[nbr_indices], axis=0)
 
-        self_weights = wb['self_weights']
-        nbr_weights = wb['nbr_weights']
+        weights = wb['weights']
         biases = wb['biases']
 
-        self_act = np.dot(inputs, self_weights)
-        # sna_vect = np.vectorize(stacked_neighbor_activations)
+        self_act = np.dot(inputs, weights)
         nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
-                         nbr_weights)
+                         weights)
         # print('Computing activations...')
         return relu(self_act + nbr_act + biases)
 
@@ -176,11 +174,11 @@ class GraphConvLayer(object):
         ========
         - output_shape: (2-tuple) of integers specifying the output shape.
         """
-        assert input_shape[1] == self.kernel_shape[0],\
-            'input_shape dim 1 must be same as kernel_shape dim 0'
+        # assert input_shape[1] == self.kernel_shape[0],\
+        #     'input_shape dim 1 must be same as kernel_shape dim 0'
 
-        self.wb.add(name='self_weights', shape=self.kernel_shape)
-        self.wb.add(name='nbr_weights', shape=self.kernel_shape)
+        self.wb.add(name='weights', shape=self.kernel_shape)
+        # self.wb.add(name='nbr_weights', shape=self.kernel_shape)
         self.wb.add(name='biases', shape=(1, self.kernel_shape[1]))
 
         output_shape = (input_shape[0], self.kernel_shape[1])

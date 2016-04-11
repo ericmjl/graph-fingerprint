@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"sum",
+				"sum_score"
+			],
+			[
+				"sumfeat",
+				"sum_feat"
+			],
+			[
+				"graph",
+				"graph_indices"
+			],
+			[
+				"samp",
+				"samp_graphs"
+			],
+			[
+				"training",
+				"training_losses"
+			],
+			[
 				"samp_",
 				"samp_graphs"
 			],
@@ -408,14 +428,18 @@
 	],
 	"file_history":
 	[
-		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/The back-story to our publication on influenza reassortment, and lessons learned/index.html",
+		"/Users/ericmjl/Documents/github/scikit-learn/sklearn/preprocessing/data.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/flatten.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/custom_funcs.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb2.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/setup.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/graph_fp_layered.py",
+		"/Volumes/ericmjl/computational_runs/20160408-Reassortment_Detection-brandt_minto_run2/sequence_splitter_sh.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/optimizers.py",
+		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/The back-story to our publication on influenza reassortment, and lessons learned/index.html",
 		"/Users/ericmjl/Dropbox (MIT)/Share_with_Eric/H5N2_analysis/Global_trees/JR_AR_taxa.txt",
 		"/Users/ericmjl/Documents/github/autograd/examples/convnet.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/flatten.py",
 		"/Users/ericmjl/Documents/github/microblog/environment.yml",
 		"/Users/ericmjl/Documents/github/neural-fingerprint/examples/regression.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/fingerprint_vect.py",
@@ -531,11 +555,7 @@
 		"/Users/ericmjl/Desktop/wpa_supplicant.conf",
 		"/Users/ericmjl/Documents/github/hiv-resistance-prediction/isoelectric_point.py",
 		"/Users/ericmjl/Downloads/pybluez/setup.py",
-		"/etc/sudoers",
-		"/Users/ericmjl/Dropbox (Personal)/Downloads/lightblue-0.4/setup.py",
-		"/Users/ericmjl/Documents/github/systems-microbiology-hiv/environment.yml",
-		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/Reticulate Evolution and Microbial Ecology.md",
-		"/Users/ericmjl/Documents/github/microblog/app/views.py"
+		"/etc/sudoers"
 	],
 	"find":
 	{
@@ -553,6 +573,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"self_weights",
+			"LinearRegres",
+			" = ",
 			"score_fun",
 			"cf.score_sqrt",
 			"score_sum",
@@ -677,10 +700,7 @@
 			"resiname",
 			"aromatic_resis",
 			"add_aromatic_sulphur_interactions_",
-			"aa",
-			"get_ring_centroids_",
-			"get_ring_atoms_",
-			"resi_rings_df"
+			"aa"
 		],
 		"highlight": true,
 		"in_selection": false,

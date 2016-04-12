@@ -1,19 +1,26 @@
+"""
+Author: Eric J. Ma
+Date Created: 12 April 2016
+
+Purpose:
+Can we learn a sine transformation on top of a convolution?
+"""
+
 import numpy as np
-import custom_funcs as cf
+import graphfp.custom_funcs as cf
 import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import LabelBinarizer
 from random import sample, choice
-from convnet import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
-    LinearRegressionLayer, FullyConnectedLayer, MaxPoolLayer
-from wb2 import WeightsAndBiases
+from graphfp.convnet import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
+    LinearRegressionLayer
+from graphfp.wb2 import WeightsAndBiases
 from time import time
 from autograd import grad
-from autograd.util import check_grads
-from flatten import flatten
-# from optimizers import sgd
+# from autograd.util import check_grads
+from graphfp.flatten import flatten
 
-n_feats = 6
+n_feats = 9
 all_nodes = [i for i in range(n_feats)]
 lb = LabelBinarizer()
 features_dict = {i: lb.fit_transform(all_nodes)[i] for i in all_nodes}
@@ -38,20 +45,14 @@ graphs = [cf.make_random_graph(nodes=sample(all_nodes, choice(n_nodes)),
 
 input_shape = (1, 10)
 
-layers = [# GraphConvLayer(kernel_shape=(n_feats, 2*n_feats)),
-          # GraphConvLayer(kernel_shape=(20, 20)),
-          # GraphConvLayer(kernel_shape=(2*n_feats, n_feats)),
-          GraphConvLayer(kernel_shape=(n_feats, n_feats)),
-          # MaxPoolLayer(),
+layers = [GraphConvLayer(kernel_shape=(n_feats, n_feats)),
           FingerprintLayer(n_feats),
-          # FullyConnectedLayer((10, 10)),
-          # FullyConnectedLayer((10, 1)),
           LinearRegressionLayer(shape=(n_feats, 1)),
           ]
 print(layers)
 
 
-def initialize_network(input_shape, layers, graphs):
+def initialize_network(input_shape, graphs):
     """
     Initializes all weights, biases and other parameters to random floats
     between 0 and 1.
@@ -68,7 +69,7 @@ def initialize_network(input_shape, layers, graphs):
     return wb_all
 
 
-def predict(wb_struct, inputs, layers, graphs):
+def predict(wb_struct, inputs, graphs):
     curr_inputs = inputs
 
     for i, layer in enumerate(layers):
@@ -81,16 +82,35 @@ def predict(wb_struct, inputs, layers, graphs):
 # new signature
 
 
-def train_loss(wb_vect, unflattener, inputs, layers, graphs):
+def train_loss(wb_vect, unflattener, batch=True, batch_size=10):  # , inputs, layers, graphs):
     """
     Training loss is MSE.
 
     We pass in a flattened parameter vector.
+
+    TODO:
+    =====
+    - Convert inputs, layers, and graphs into variables that have global scope
+      in the script.
     """
     wb_struct = unflattener(wb_vect)
-    preds = predict(wb_struct, inputs, layers, graphs)
-    graph_scores = np.array([float(score_func(g)) for g in graphs]).reshape(
-        (len(graphs), 1))
+
+    # Move this out of SGD and into train_loss function.
+    if batch:
+        batch_size = batch_size
+    else:
+        batch_size = len(graphs)
+
+    samp_graphs, samp_inputs = batch_sample(graphs, batch_size)
+
+    #     samp_graphs = sample(graphs, batch_size)
+    # else:
+    #     samp_graphs = graphs
+    # samp_inputs = GraphInputLayer(input_shape).forward_pass(samp_graphs)
+
+    preds = predict(wb_struct, samp_inputs, samp_graphs)
+    graph_scores = np.array([float(score_func(g)) for g in samp_graphs]).\
+        reshape((len(samp_graphs), 1))
 
     mse = np.mean(np.power(preds - graph_scores, 2))
     return mse
@@ -103,26 +123,36 @@ gradfunc = grad(train_loss)
 # check_grads(oatl, wb_vect)
 
 
-def callback(wb, inputs, layers, graphs, i):
+def batch_sample(graphs, batch_size=10):
+    samp_graphs = sample(graphs, batch_size)
+    samp_inputs = GraphInputLayer(input_shape).forward_pass(samp_graphs)
+
+    return samp_graphs, samp_inputs
+
+
+training_losses = []
+def callback(wb, i, batch_size=10):
     start = time()
     wb_vect, wb_unflattener = flatten(wb)
     print('Epoch: {0}'.format(i))
     # print('Computing gradient w.r.t. weights...')
 
     print('Training Loss: ')
-    tl = train_loss(wb_vect, wb_unflattener, inputs, layers, graphs)
+    samp_graphs, samp_inputs = batch_sample(graphs, batch_size)
+
+    tl = train_loss(wb_vect, wb_unflattener)
     print(tl)
     # training_losses.append(tl)
 
     end = time()
     print('Time: {0}'.format(end - start))
     print('')
-    return tl
+    training_losses.append(tl)
+    # return tl
 
 
-def sgd(gradfunc, wb, layers, graphs, callback=None,
-        num_iters=200, step_size=0.1, mass=0.9, batch=False,
-        batch_size=10, adaptive=False):
+def sgd(gradfunc, wb, layers, graphs, callback=None, num_iters=200,
+        step_size=0.1, mass=0.9, adaptive=False):
     """
     Batch stochastic gradient descent with momentum.
 
@@ -133,55 +163,53 @@ def sgd(gradfunc, wb, layers, graphs, callback=None,
     wb_vect, wb_unflattener = flatten(wb)
     velocity = np.zeros(len(wb_vect))
 
-    training_losses = []
+    # training_losses = []
     for i in range(num_iters):
         # start = time()
 
-        if batch:
-            samp_graphs = sample(graphs, batch_size)
-        else:
-            samp_graphs = graphs
-        samp_inputs = GraphInputLayer(input_shape).forward_pass(samp_graphs)
-
-        g = gradfunc(wb_vect, wb_unflattener, samp_inputs, layers, samp_graphs)
+        g = gradfunc(wb_vect, wb_unflattener)
         velocity = mass * velocity - (1.0 - mass) * g
         wb_vect += step_size * velocity
         if adaptive:
             step_size = step_size * (1 - step_size)
 
-        # Diagnostic statements.
+        # Diagnostic statements. Move out of SGD.
         wb = wb_unflattener(wb_vect)
-        tl = callback(wb, samp_inputs, layers, samp_graphs, i)
-        training_losses.append(tl)
-        print('Step size: {0}'.format(step_size))
-    plt.plot(training_losses)
+        if callback:
+            callback(wb, i)
+            # training_losses.append(tl)
+        # print('Step size: {0}'.format(step_size))
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.plot(training_losses)
+    ax.set_yscale('log')
     plt.show()
 
     return wb_vect, wb_unflattener
 
 
-wb_all = initialize_network(input_shape, layers, graphs)
+wb_all = initialize_network(input_shape, graphs)
 
 wb_vect, wb_unflattener = sgd(gradfunc, wb_all, layers, graphs,
-                              callback=callback, num_iters=2000, step_size=0.1,
-                              batch=True, batch_size=20, adaptive=True)
+                              callback=callback, num_iters=5000, step_size=0.1,
+                              adaptive=True)
 
 
 inputs = GraphInputLayer(input_shape).forward_pass(graphs)
 print('Final training loss:')
-print(train_loss(wb_vect, wb_unflattener, inputs, layers, graphs))
+print(train_loss(wb_vect, wb_unflattener))
 
 wb_new = wb_unflattener(wb_vect)
 
-print('Predictions on Training Data:')
-preds = predict(wb_new, inputs, layers, graphs)
-print(preds)
-print('Actual:')
-scores = [score_func(g) for g in graphs]
-print(scores)
-print(wb_unflattener(wb_vect))
+# print('Predictions on Training Data:')
+# preds = predict(wb_new, inputs, graphs)
+# print(preds)
+# print('Actual:')
+# scores = [score_func(g) for g in graphs]
+# print(scores)
+# print(wb_unflattener(wb_vect))
 
-n_new_graphs = 10
+n_new_graphs = 100
 new_graphs = [cf.make_random_graph(nodes=sample(all_nodes, choice(n_nodes)),
                                    n_edges=choice(n_nodes),
                                    features_dict=features_dict)
@@ -189,15 +217,25 @@ new_graphs = [cf.make_random_graph(nodes=sample(all_nodes, choice(n_nodes)),
 
 new_inputs = GraphInputLayer(input_shape).forward_pass(new_graphs)
 
-preds = predict(wb_new, new_inputs, layers, new_graphs)
+preds = predict(wb_new, new_inputs, new_graphs)
 actual = np.array([score_func(g) for g in new_graphs]).reshape(
     (len(new_graphs), 1))
 
-print('Predictions:')
-print(preds)
+# print('Predictions:')
+# print(preds)
 
-print('Actual:')
-print(actual)
+# print('Actual:')
+# print(actual)
 
-print('Absolute Error:')
-print(np.abs(preds - actual))
+# print('Absolute Error:')
+# print(np.abs(preds - actual))
+
+"""Make a scatterplot of the actual vs. predicted values"""
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.scatter(actual, preds, color='red', label='predictions')
+ax.set_xlabel('actual')
+ax.set_ylabel('predictions')
+# plt.scatter(np.arcsin(actual), actual, color='blue', label='actual')
+ax.legend()
+plt.show()

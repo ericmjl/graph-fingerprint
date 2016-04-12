@@ -13,7 +13,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name="graphfingerprint",
+    name="graphfp",
     version="0.1",
     author="Eric J. Ma",
     author_email="ericmajinglong@gmail.com",
@@ -22,7 +22,7 @@ setup(
     license="MIT",
     keywords="neural network, graphs, deep learning, autograd",
     url="http://packages.python.org/an_example_pypi_project",
-    packages=['an_example_pypi_project', 'tests'],
+    # packages=['an_example_pypi_project', 'tests'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",

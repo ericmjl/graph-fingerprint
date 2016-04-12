@@ -1,8 +1,8 @@
 from autograd import numpy as np
-from wb2 import WeightsAndBiases
+from .wb2 import WeightsAndBiases
 from autograd.scipy.misc import logsumexp
 from collections import defaultdict
-from custom_funcs import graph_indices
+from .custom_funcs import graph_indices
 
 def relu(x):
     """

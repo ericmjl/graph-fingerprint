@@ -424,17 +424,26 @@
 	"expanded_folders":
 	[
 		"/Users/ericmjl/Documents/github/graph-fingerprint",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint"
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments"
 	],
 	"file_history":
 	[
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/sine.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/optimizers.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/custom_funcs.py",
+		"/Users/ericmjl/Documents/github/influenza-reassortment-detector/thresholds.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/graph_fp_layered.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/wb2.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/convnet.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/setup.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/graph_fp_layered.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/graph_fp_layered.py",
 		"/Users/ericmjl/Documents/github/scikit-learn/sklearn/preprocessing/data.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/flatten.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/custom_funcs.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/wb2.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/setup.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/convnet.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/graph_fp_layered.py",
 		"/Volumes/ericmjl/computational_runs/20160408-Reassortment_Detection-brandt_minto_run2/sequence_splitter_sh.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfingerprint/optimizers.py",
 		"/private/var/folders/7b/fw10n6f17tb3zbhxd82pl51r0000gn/T/com.soulmen.ulysses3/QuickExport/The back-story to our publication on influenza reassortment, and lessons learned/index.html",
@@ -546,16 +555,7 @@
 		"/Users/ericmjl/Documents/github/tikicam-config/manual.md",
 		"/Users/ericmjl/Documents/github/tikicam-config/README.md",
 		"/Users/ericmjl/Desktop/wpa_supplicant.confg",
-		"/Users/ericmjl/Downloads/victoria.fasta",
-		"/Users/ericmjl/Documents/github/be-stats-iap2016/python-functions.md",
-		"/Users/ericmjl/Documents/github/reassortment-minto-life-history/Alaska_waterfowl_79viruses_seqs_20151223.fasta",
-		"/Volumes/FJTHUMB/license.key",
-		"/Users/ericmjl/Desktop/superscript",
-		"/Users/ericmjl/Desktop/interfaces",
-		"/Users/ericmjl/Desktop/wpa_supplicant.conf",
-		"/Users/ericmjl/Documents/github/hiv-resistance-prediction/isoelectric_point.py",
-		"/Users/ericmjl/Downloads/pybluez/setup.py",
-		"/etc/sudoers"
+		"/Users/ericmjl/Downloads/victoria.fasta"
 	],
 	"find":
 	{

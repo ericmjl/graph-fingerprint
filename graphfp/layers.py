@@ -1,21 +1,8 @@
 from autograd import numpy as np
 from .wb2 import WeightsAndBiases
-from autograd.scipy.misc import logsumexp
 from collections import defaultdict
 from .custom_funcs import graph_indices
-
-def relu(x):
-    """
-    Rectified Linear Unit
-    """
-    return x * (x > 0)
-
-
-def softmax(x, axis=0):
-    """
-    The softmax function normalizes everything to between 0 and 1.
-    """
-    return np.exp(x - logsumexp(x, axis=axis, keepdims=True))
+from .nonlinearity import tanh
 
 
 class GraphInputLayer(object):
@@ -91,6 +78,7 @@ class GraphConvLayer(object):
         - kernel_shape: (2-tuple) of n_rows, n_cols. n_rows should correspond
                         to the number of columns for the matrix returned in
                         the previous layer.
+        - nonlinearity: a nonlinearity function from the nonlinearity module.
         """
         self.kernel_shape = kernel_shape
         self.wb = WeightsAndBiases()
@@ -162,7 +150,7 @@ class GraphConvLayer(object):
         nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
                          weights)
         # print('Computing activations...')
-        return relu(self_act + nbr_act + biases)
+        return tanh(self_act + nbr_act + biases)
 
     def build_weights(self, input_shape):
         """
@@ -214,7 +202,7 @@ class FingerprintLayer(object):
             fp = np.sum(inputs[idxs], axis=0)
             fingerprints.append(fp)
 
-        return relu(np.vstack(fingerprints))
+        return tanh(np.vstack(fingerprints))
 
     def build_weights(self, input_shape):
         """
@@ -262,7 +250,7 @@ class MaxPoolLayer(object):
                         # max_idx = nbr_idx
                 outputs[idxs] = sum_feat
 
-        return relu(outputs)
+        return tanh(outputs)
 
     def build_weights(self, input_shape):
         self.wb.add('weights', shape=input_shape)
@@ -282,7 +270,7 @@ class FullyConnectedLayer(object):
         return "FullyConnectedLayer"
 
     def forward_pass(self, wb, inputs, graphs):
-        return relu(np.dot(inputs, wb['weights']) + wb['bias'])
+        return tanh(np.dot(inputs, wb['weights']) + wb['bias'])
 
     def build_weights(self, input_shape):
         self.wb.add('weights', shape=self.shape)

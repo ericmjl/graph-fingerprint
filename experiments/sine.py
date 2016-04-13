@@ -136,13 +136,15 @@ wb_all = initialize_network(input_shape, graphs)
 
 """Train on testing data."""
 wb_vect, wb_unflattener = sgd(gradfunc, wb_all, layers, graphs,
-                              callback=callback, num_iters=500, step_size=0.1,
+                              callback=callback, num_iters=5000, step_size=0.1,
                               adaptive=True)
 
 
 """Print the training losses."""
-# print(training_losses)
-plt.plot(training_losses)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.set_yscale('log')
+ax.plot(training_losses)
 
 
 inputs = GraphInputLayer(input_shape).forward_pass(graphs)

@@ -10,6 +10,7 @@ import numpy as np
 import graphfp.custom_funcs as cf
 import matplotlib.pyplot as plt
 import math
+import matplotlib.animation as animation
 
 from sklearn.preprocessing import LabelBinarizer
 from random import sample, choice
@@ -21,6 +22,7 @@ from graphfp.wb2 import WeightsAndBiases
 from graphfp.flatten import flatten
 from graphfp.optimizers import sgd
 from graphfp.utils import batch_sample
+from time import sleep
 # from autograd.util import check_grads
 
 n_feats = 30
@@ -107,7 +109,6 @@ def train_loss(wb_vect, unflattener, batch=True, batch_size=10):
 gradfunc = grad(train_loss)
 
 training_losses = []
-fig_tl = plt.figure()
 
 
 def callback(wb, i):
@@ -130,22 +131,18 @@ def callback(wb, i):
 
     training_losses.append(tl)
 
-    """Make plot of training losses"""
-    ax = fig.add_subplot(111)
-    ax.plot(training_losses)
-    ax.set_yscale('log')
-    ax.set_xlabel('epoch')
-    ax.set_ylabel('training loss')
-
-
 
 wb_all = initialize_network(input_shape, graphs)
 
 """Train on testing data."""
 wb_vect, wb_unflattener = sgd(gradfunc, wb_all, layers, graphs,
-                              callback=callback, num_iters=1000, step_size=0.1,
+                              callback=callback, num_iters=500, step_size=0.1,
                               adaptive=True)
 
+
+"""Print the training losses."""
+# print(training_losses)
+plt.plot(training_losses)
 
 
 inputs = GraphInputLayer(input_shape).forward_pass(graphs)

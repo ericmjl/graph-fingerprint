@@ -1,6 +1,9 @@
 # Sublime Workspace configuration
 *.sublime-workspace
 
+# Experiment figures
+experiments/figures/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

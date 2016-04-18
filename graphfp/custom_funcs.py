@@ -98,6 +98,19 @@ def score_sine(G):
     return sum_score
 
 
+def score_tan(G):
+    """
+    Takes advantage of tangent function.
+    """
+
+    sum_score = 0
+    for n in G.nodes():
+        sum_score += np.tan(n)
+        for nbr in G.neighbors(n):
+            sum_score += np.tan(nbr)
+
+    return sum_score
+
 def get_graph_idxs(graphs):
     """
     Given a list of graphs, returns a list of row indices stored on each graph.

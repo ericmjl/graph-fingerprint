@@ -90,11 +90,11 @@ if __name__ == '__main__':
     """Set up hyperparameters."""
     func_name = sys.argv[1]
     score_func = eval(sys.argv[1])
-    num_iters = int(sys.argv[2])
-    n_feats = int(sys.argv[3])
+    arch = sys.argv[2]
+    num_iters = int(sys.argv[3])
+    n_feats = int(sys.argv[4])
 
     """Initialize graphs."""
-    # n_feats = 30
     all_nodes = [i for i in range(n_feats)]
     lb = LabelBinarizer()
     features_dict = {i: lb.fit_transform(all_nodes)[i] for i in all_nodes}
@@ -111,10 +111,20 @@ if __name__ == '__main__':
 
     input_shape = (1, 10)
 
-    layers = [GraphConvLayer(kernel_shape=(n_feats, n_feats)),
-              GraphConvLayer(kernel_shape=(n_feats, n_feats)),
-              FingerprintLayer(n_feats),
-              LinearRegressionLayer(shape=(n_feats, 1))]
+    lyr_dict = dict()
+    lyr_dict['fp_linear'] = [FingerprintLayer(n_feats),
+                             LinearRegressionLayer(shape=(n_feats, 1))]
+
+    lyr_dict['one_conv'] = [GraphConvLayer((n_feats, n_feats)),
+                            FingerprintLayer(n_feats),
+                            LinearRegressionLayer(shape=(n_feats, 1))]
+
+    lyr_dict['two_conv'] = [GraphConvLayer((n_feats, n_feats)),
+                            GraphConvLayer((n_feats, n_feats)),
+                            FingerprintLayer(n_feats),
+                            LinearRegressionLayer(shape=(n_feats, 1))]
+
+    layers = lyr_dict[arch]
 
     gradfunc = grad(train_loss)
     training_losses = []
@@ -130,8 +140,8 @@ if __name__ == '__main__':
     ax = fig.add_subplot(111)
     ax.set_yscale('log')
     ax.plot(training_losses)
-    plt.savefig('figures/{0}.{1}_iters.{2}_feats.training_loss.pdf'
-                .format(func_name, num_iters, n_feats))
+    plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-training_loss.pdf'
+                .format(func_name, num_iters, n_feats, arch))
 
     inputs = GraphInputLayer(input_shape).forward_pass(graphs)
     print('Final training loss:')
@@ -141,18 +151,17 @@ if __name__ == '__main__':
 
     """Make predictions on new graphs"""
     n_new_graphs = 100
-    new_graphs = [cf.make_random_graph(nodes=sample(all_nodes, choice(n_nodes)),
+    new_graphs = [cf.make_random_graph(nodes=sample(all_nodes,
+                                                    choice(n_nodes)),
                                        n_edges=choice(n_nodes),
                                        features_dict=features_dict)
                   for i in range(n_new_graphs)]
 
     new_inputs = GraphInputLayer(input_shape).forward_pass(new_graphs)
 
-
     preds = predict(wb_new, new_inputs, new_graphs)
     actual = np.array([score_func(g) for g in new_graphs]).reshape(
         (len(new_graphs), 1))
-
 
     """Make a scatterplot of the actual vs. predicted values on new data."""
     fig = plt.figure()
@@ -162,5 +171,5 @@ if __name__ == '__main__':
     ax.set_ylabel('predictions')
     ax.plot(*y_equals_x(actual), color='red')  # this is the y=x line
     ax.legend()
-    plt.savefig('figures/{0}.{1}_iters.{2}_feats.preds_vs_actual.pdf'
-                .format(func_name, num_iters, n_feats))
+    plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-preds_vs_actual.pdf'
+                .format(func_name, num_iters, n_feats, arch))

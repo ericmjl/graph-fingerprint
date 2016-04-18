@@ -424,13 +424,21 @@
 	"expanded_folders":
 	[
 		"/Users/ericmjl/Documents/github/graph-fingerprint",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments"
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/figures",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp"
 	],
 	"file_history":
 	[
-		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/sine.py",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/optimizers.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/custom_funcs.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/fingerprint_linear.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/optimizers.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/utils.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/layers.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/sine.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/num_nodes.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/nonlinearity.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graph-fingerprint.sublime-project",
 		"/Users/ericmjl/Documents/github/influenza-reassortment-detector/thresholds.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/graph_fp_layered.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/wb2.py",
@@ -549,17 +557,11 @@
 		"/Users/ericmjl/Documents/github/picamera-auto/picam.py",
 		"/Users/ericmjl/Documents/github/tikicam-config/update_github.py",
 		"/Users/ericmjl/Documents/github/picamera-auto/capture_sequence.py",
-		"/Users/ericmjl/Documents/github/tikicam-config/superscript",
-		"/Users/ericmjl/Documents/github/tikicam-config/wpa_supplicant.conf",
-		"/Users/ericmjl/Documents/github/tikicam-config/remove_data.sh",
-		"/Users/ericmjl/Documents/github/tikicam-config/manual.md",
-		"/Users/ericmjl/Documents/github/tikicam-config/README.md",
-		"/Users/ericmjl/Desktop/wpa_supplicant.confg",
-		"/Users/ericmjl/Downloads/victoria.fasta"
+		"/Users/ericmjl/Documents/github/tikicam-config/superscript"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -573,6 +575,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"wb_struct",
+			"initialize",
+			"layers",
+			"relu",
+			"tanh",
+			"GraphInputLayer",
+			"self.nonlinearity",
+			"tanh",
+			"tanhnonlinearity",
+			"tanh",
+			"relu",
 			"self_weights",
 			"LinearRegres",
 			" = ",
@@ -689,18 +702,7 @@
 			"get_ring_atoms_",
 			"test_add_ionic_interactions_",
 			"bonds_set",
-			"bonds",
-			"bond",
-			"lb",
-			".values[0]",
-			"CATION_RESIS",
-			"cation",
-			"ionic_resis",
-			"net.add",
-			"resiname",
-			"aromatic_resis",
-			"add_aromatic_sulphur_interactions_",
-			"aa"
+			"bonds"
 		],
 		"highlight": true,
 		"in_selection": false,

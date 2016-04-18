@@ -87,7 +87,13 @@ def callback(wb, i):
 
 if __name__ == '__main__':
 
-    """Set up hyperparameters."""
+    """
+    Set up hyperparameters.
+
+    The signature at the command line will look like:
+
+        $ python nnet_arch.py cf.score_func fp_linear 500 10
+    """
     func_name = sys.argv[1]
     score_func = eval(sys.argv[1])
     arch = sys.argv[2]

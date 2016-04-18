@@ -1,5 +1,5 @@
 # Sublime Workspace configuration
-*.sublime-workspace
+graph-fingerprint.sublime-workspace
 
 # Experiment figures
 experiments/figures/*

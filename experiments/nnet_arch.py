@@ -184,6 +184,6 @@ if __name__ == '__main__':
         ax.legend()
         plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-preds_vs_actual.pdf'
                     .format(func_name, num_iters, n_feats, arch))
-        plt.show()
+        # plt.show()
 
     make_scatterplot_figure()

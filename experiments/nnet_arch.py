@@ -99,7 +99,7 @@ if __name__ == '__main__':
     arch = sys.argv[2]
     num_iters = int(sys.argv[3])
     n_feats = int(sys.argv[4])
-    make_plots = bool(sys.argv[5])
+    make_plots = eval(sys.argv[5])
 
     """Initialize graphs."""
     all_nodes = [i for i in range(n_feats)]

@@ -143,12 +143,15 @@ if __name__ == '__main__':
                                   step_size=0.1, adaptive=True)
 
     """Print the training losses."""
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    ax.set_yscale('log')
-    ax.plot(training_losses)
-    plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-training_loss.pdf'
-                .format(func_name, num_iters, n_feats, arch))
+    def make_training_loss_figure():
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        ax.set_yscale('log')
+        ax.plot(training_losses)
+        plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-training_loss.pdf'
+                    .format(func_name, num_iters, n_feats, arch))
+
+    make_training_loss_figure()
 
     inputs = GraphInputLayer(input_shape).forward_pass(graphs)
     print('Final training loss:')
@@ -171,13 +174,16 @@ if __name__ == '__main__':
         (len(new_graphs), 1))
 
     """Make a scatterplot of the actual vs. predicted values on new data."""
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    ax.scatter(actual, preds, color='red', label='predictions')
-    ax.set_xlabel('actual')
-    ax.set_ylabel('predictions')
-    ax.plot(*y_equals_x(actual), color='red')  # this is the y=x line
-    ax.legend()
-    plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-preds_vs_actual.pdf'
-                .format(func_name, num_iters, n_feats, arch))
-    plt.show()
+    def make_scatterplot_figure():
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        ax.scatter(actual, preds, color='red', label='predictions')
+        ax.set_xlabel('actual')
+        ax.set_ylabel('predictions')
+        ax.plot(*y_equals_x(actual), color='red')  # this is the y=x line
+        ax.legend()
+        plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-preds_vs_actual.pdf'
+                    .format(func_name, num_iters, n_feats, arch))
+        plt.show()
+
+    make_scatterplot_figure()

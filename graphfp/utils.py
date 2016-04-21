@@ -3,6 +3,7 @@ from .layers import GraphInputLayer
 import math
 from .wb2 import WeightsAndBiases
 
+
 def batch_sample(graphs, input_shape, batch_size=10):
     samp_graphs = sample(graphs, batch_size)
     samp_inputs = GraphInputLayer(input_shape).forward_pass(samp_graphs)

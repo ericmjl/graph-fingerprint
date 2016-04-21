@@ -117,6 +117,7 @@ if __name__ == '__main__':
 
     input_shape = (1, 10)
 
+    """Set up different simple neural net architectures that can be tested."""
     lyr_dict = dict()
     lyr_dict['fp_linear'] = [FingerprintLayer(n_feats),
                              LinearRegressionLayer(shape=(n_feats, 1))]
@@ -179,3 +180,4 @@ if __name__ == '__main__':
     ax.legend()
     plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-preds_vs_actual.pdf'
                 .format(func_name, num_iters, n_feats, arch))
+    plt.show()

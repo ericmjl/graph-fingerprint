@@ -425,12 +425,14 @@
 	[
 		"/Users/ericmjl/Documents/github/graph-fingerprint",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/figures",
-		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp"
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/.ipynb_checkpoints"
 	],
 	"file_history":
 	[
+		"/Users/ericmjl/Downloads/HP_H5N2_NA.fasta",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/custom_funcs.py",
+		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/nnet_arch.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/experiments/fingerprint_linear.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/optimizers.py",
 		"/Users/ericmjl/Documents/github/graph-fingerprint/graphfp/utils.py",
@@ -555,9 +557,7 @@
 		"/Users/ericmjl/Downloads/sample.txt",
 		"/Users/ericmjl/Downloads/challenge/data-final/test-final.txt",
 		"/Users/ericmjl/Documents/github/picamera-auto/picam.py",
-		"/Users/ericmjl/Documents/github/tikicam-config/update_github.py",
-		"/Users/ericmjl/Documents/github/picamera-auto/capture_sequence.py",
-		"/Users/ericmjl/Documents/github/tikicam-config/superscript"
+		"/Users/ericmjl/Documents/github/tikicam-config/update_github.py"
 	],
 	"find":
 	{
@@ -575,6 +575,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"tan",
 			"wb_struct",
 			"initialize",
 			"layers",
@@ -701,8 +702,7 @@
 			"degrees",
 			"get_ring_atoms_",
 			"test_add_ionic_interactions_",
-			"bonds_set",
-			"bonds"
+			"bonds_set"
 		],
 		"highlight": true,
 		"in_selection": false,

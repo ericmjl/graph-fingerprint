@@ -92,13 +92,14 @@ if __name__ == '__main__':
 
     The signature at the command line will look like:
 
-        $ python nnet_arch.py cf.score_func fp_linear 500 10
+        $ python nnet_arch.py cf.score fp_linear 500 10 False
     """
     func_name = sys.argv[1]
     score_func = eval(sys.argv[1])
     arch = sys.argv[2]
     num_iters = int(sys.argv[3])
     n_feats = int(sys.argv[4])
+    make_plots = bool(sys.argv[5])
 
     """Initialize graphs."""
     all_nodes = [i for i in range(n_feats)]
@@ -151,7 +152,8 @@ if __name__ == '__main__':
         plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-training_loss.pdf'
                     .format(func_name, num_iters, n_feats, arch))
 
-    make_training_loss_figure()
+    if make_plots:
+        make_training_loss_figure()
 
     inputs = GraphInputLayer(input_shape).forward_pass(graphs)
     print('Final training loss:')
@@ -186,4 +188,5 @@ if __name__ == '__main__':
                     .format(func_name, num_iters, n_feats, arch))
         # plt.show()
 
-    make_scatterplot_figure()
+    if make_plots:
+        make_scatterplot_figure()

@@ -1,4 +1,4 @@
-from fingerprint import GraphFingerprint
+from graphfp import GraphFingerprint
 from wb import WeightsAndBiases
 from itertools import combinations
 from random import sample, choice

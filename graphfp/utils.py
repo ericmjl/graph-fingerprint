@@ -39,4 +39,3 @@ def initialize_network(input_shape, graphs, layers_spec):
         wb_all['layer{0}_{1}'.format(i, layer)] = wb
 
     return wb_all
-

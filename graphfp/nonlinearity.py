@@ -21,3 +21,10 @@ def tanh(x):
     tanh non-linearity
     """
     return np.tanh(x)
+
+
+def logistic(x):
+    """
+    logistic nonlinearity
+    """
+    return np.log(1 / (1 + np.exp(x)))

@@ -1,8 +1,9 @@
 from autograd import numpy as np
+import autograd.numpy.random as npr
 from .wb2 import WeightsAndBiases
 from collections import defaultdict
 from .custom_funcs import graph_indices
-from .nonlinearity import tanh
+from .nonlinearity import logistic
 
 
 class GraphInputLayer(object):
@@ -150,7 +151,7 @@ class GraphConvLayer(object):
         nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
                          weights)
         # print('Computing activations...')
-        return tanh(self_act + nbr_act + biases)
+        return logistic(self_act + nbr_act + biases)
 
     def build_weights(self, input_shape):
         """
@@ -202,7 +203,7 @@ class FingerprintLayer(object):
             fp = np.sum(inputs[idxs], axis=0)
             fingerprints.append(fp)
 
-        return tanh(np.vstack(fingerprints))
+        return logistic(np.vstack(fingerprints))
 
     def build_weights(self, input_shape):
         """
@@ -250,7 +251,7 @@ class MaxPoolLayer(object):
                         # max_idx = nbr_idx
                 outputs[idxs] = sum_feat
 
-        return tanh(outputs)
+        return logistic(outputs)
 
     def build_weights(self, input_shape):
         self.wb.add('weights', shape=input_shape)
@@ -270,7 +271,7 @@ class FullyConnectedLayer(object):
         return "FullyConnectedLayer"
 
     def forward_pass(self, wb, inputs, graphs):
-        return tanh(np.dot(inputs, wb['weights']) + wb['bias'])
+        return logistic(np.dot(inputs, wb['weights']) + wb['bias'])
 
     def build_weights(self, input_shape):
         self.wb.add('weights', shape=self.shape)
@@ -278,6 +279,26 @@ class FullyConnectedLayer(object):
         self.wb.add('bias', shape=output_shape)
 
         return output_shape, self.wb
+
+
+class DropoutLayer(object):
+    """
+    A dropout layer randomly sets particular columns of the outputs to be
+    zeros with a probability of p.
+    """
+    def __init__(self, p):
+        self.p = p
+        self.wb = WeightsAndBiases()
+
+    def __repr__(self):
+        return "DropoutLayer"
+
+    def forward_pass(self, wb, inputs, graphs):
+        return inputs * npr.binomial(1, self.p, size=(inputs.shape))
+
+    def build_weights(self, input_shape):
+        self.wb.add('weights', shape=input_shape)
+        return input_shape, self.wb
 
 
 class LinearRegressionLayer(object):

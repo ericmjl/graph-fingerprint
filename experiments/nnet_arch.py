@@ -132,6 +132,10 @@ if __name__ == '__main__':
                             FingerprintLayer(n_feats),
                             LinearRegressionLayer(shape=(n_feats, 1))]
 
+    lyr_dict['1conv_expd'] = [GraphConvLayer((n_feats, 2*n_feats)),
+                              FingerprintLayer(2*n_feats),
+                              LinearRegressionLayer(shape=(2*n_feats, 1))]
+
     layers = lyr_dict[arch]
 
     gradfunc = grad(train_loss)

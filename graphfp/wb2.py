@@ -1,5 +1,6 @@
 from .flatten import flatten
 import autograd.numpy.random as npr
+import autograd.numpy as np
 
 
 class WeightsAndBiases(dict):
@@ -31,4 +32,5 @@ class WeightsAndBiases(dict):
         - name: (string) self_weights, nbr_weights, biases, or some other name.
         - shape: (tuple) the dimensions of the layer.
         """
-        self[name] = npr.normal(0, 0.1, shape)
+        self[name] = npr.normal(0, 0.001, shape)
+        # self[name] = np.ones(shape)

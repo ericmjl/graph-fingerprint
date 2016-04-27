@@ -3,7 +3,7 @@ import autograd.numpy.random as npr
 from .wb2 import WeightsAndBiases
 from collections import defaultdict
 from .custom_funcs import graph_indices
-from .nonlinearity import logistic
+from .nonlinearity import tanh, relu
 
 
 class GraphInputLayer(object):
@@ -151,7 +151,7 @@ class GraphConvLayer(object):
         nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
                          weights)
         # print('Computing activations...')
-        return logistic(self_act + nbr_act + biases)
+        return relu(self_act + nbr_act + biases)
 
     def build_weights(self, input_shape):
         """
@@ -203,7 +203,7 @@ class FingerprintLayer(object):
             fp = np.sum(inputs[idxs], axis=0)
             fingerprints.append(fp)
 
-        return logistic(np.vstack(fingerprints))
+        return np.vstack(fingerprints)
 
     def build_weights(self, input_shape):
         """
@@ -251,7 +251,7 @@ class MaxPoolLayer(object):
                         # max_idx = nbr_idx
                 outputs[idxs] = sum_feat
 
-        return logistic(outputs)
+        return relu(outputs)
 
     def build_weights(self, input_shape):
         self.wb.add('weights', shape=input_shape)
@@ -271,7 +271,7 @@ class FullyConnectedLayer(object):
         return "FullyConnectedLayer"
 
     def forward_pass(self, wb, inputs, graphs):
-        return logistic(np.dot(inputs, wb['weights']) + wb['bias'])
+        return relu(np.dot(inputs, wb['weights']) + wb['bias'])
 
     def build_weights(self, input_shape):
         self.wb.add('weights', shape=self.shape)

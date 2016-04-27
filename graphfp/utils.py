@@ -2,6 +2,7 @@ from random import sample
 from .layers import GraphInputLayer
 import math
 from .wb2 import WeightsAndBiases
+import autograd.numpy as np
 
 
 def batch_sample(graphs, input_shape, batch_size=10):
@@ -9,6 +10,14 @@ def batch_sample(graphs, input_shape, batch_size=10):
     samp_inputs = GraphInputLayer(input_shape).forward_pass(samp_graphs)
 
     return samp_graphs, samp_inputs
+
+
+def batch_normalize(x):
+    """
+    Batch normalizes the matrix along the data axis.
+    """
+    mbmean = np.mean(x, axis=0, keepdims=True)
+    return (x - mbmean) / (np.std(x, axis=0, keepdims=True) + 1)
 
 
 def y_equals_x(actual_data):

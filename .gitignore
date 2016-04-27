@@ -1,6 +1,7 @@
 # Experiment figures
 experiments/figures/*
 experiments/figures_*
+*.sublime*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

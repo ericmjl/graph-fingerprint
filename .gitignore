@@ -1,5 +1,6 @@
 # Experiment figures
 experiments/figures/*
+experiments/figures_*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

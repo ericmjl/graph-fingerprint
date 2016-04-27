@@ -3,7 +3,7 @@ import autograd.numpy.random as npr
 from .wb2 import WeightsAndBiases
 from collections import defaultdict
 from .custom_funcs import graph_indices
-from .nonlinearity import tanh, relu
+from .nonlinearity import relu
 
 
 class GraphInputLayer(object):

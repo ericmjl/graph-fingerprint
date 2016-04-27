@@ -19,7 +19,7 @@ from graphfp.layers import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
     LinearRegressionLayer
 from graphfp.wb2 import WeightsAndBiases
 from graphfp.flatten import flatten
-from graphfp.optimizers import sgd
+from graphfp.optimizers import sgd, adam
 from graphfp.utils import batch_sample, y_equals_x, initialize_network
 # from autograd.util import check_grads
 
@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
     The signature at the command line will look like:
 
-        $ python nnet_arch.py cf.score fp_linear 500 10 False
+        $ python nnet_arch.py cf.score fp_linear 500 10 True
     """
     func_name = sys.argv[1]
     score_func = eval(sys.argv[1])
@@ -143,9 +143,8 @@ if __name__ == '__main__':
     wb_all = initialize_network(input_shape, graphs, layers)
 
     """Train on testing data."""
-    wb_vect, wb_unflattener = sgd(gradfunc, wb_all, layers, graphs,
-                                  callback=callback, num_iters=num_iters,
-                                  step_size=0.1, adaptive=True)
+    wb_vect, wb_unflattener = adam(gradfunc, wb_all, callback=callback,
+                                   num_iters=num_iters)
 
     """Print the training losses."""
     def make_training_loss_figure():

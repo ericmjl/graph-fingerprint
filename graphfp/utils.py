@@ -5,14 +5,14 @@ from .wb2 import WeightsAndBiases
 import autograd.numpy as np
 
 
-def train_test_split(graphs, input_shape, test_fraction=0.2):
+def train_test_split(graphs, test_fraction=0.2):
+    """
+    Splits a set of graphs into a training and testing set.
+    """
     test_graphs = sample(graphs, int(test_fraction * len(graphs)))
-    test_inputs = GraphInputLayer(input_shape).forward_pass(test_graphs)
-
     train_graphs = set(graphs) - set(test_graphs)
-    train_inputs = GraphInputLayer(input_shape).forward_pass(train_graphs)
 
-    return train_graphs, train_inputs, test_graphs, test_inputs
+    return list(train_graphs), list(test_graphs)
 
 
 def batch_sample(graphs, input_shape, batch_size=10):

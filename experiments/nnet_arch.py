@@ -10,6 +10,7 @@ import numpy as np
 import graphfp.custom_funcs as cf
 import matplotlib.pyplot as plt
 import sys
+import seaborn
 
 from sklearn.preprocessing import LabelBinarizer
 from random import sample, choice
@@ -22,6 +23,8 @@ from graphfp.flatten import flatten
 from graphfp.optimizers import sgd, adam
 from graphfp.utils import batch_sample, y_equals_x, initialize_network
 # from autograd.util import check_grads
+
+seaborn.set_context('poster')
 
 
 def predict(wb_struct, inputs, graphs):
@@ -146,17 +149,17 @@ if __name__ == '__main__':
     wb_vect, wb_unflattener = adam(gradfunc, wb_all, callback=callback,
                                    num_iters=num_iters)
 
-    """Print the training losses."""
+    """Write the training losses."""
     def make_training_loss_figure():
-        fig = plt.figure()
+        fig = plt.figure(figsize=(4, 4))
         ax = fig.add_subplot(111)
         ax.set_yscale('log')
+        ax.set_ylabel('training error')
+        ax.set_xlabel('iteration')
         ax.plot(training_losses)
+        plt.subplots_adjust(bottom=0.2, left=0.25, top=0.9, right=0.92)
         plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-training_loss.pdf'
                     .format(func_name, num_iters, n_feats, arch))
-
-    if make_plots:
-        make_training_loss_figure()
 
     inputs = GraphInputLayer(input_shape).forward_pass(graphs)
     print('Final training loss:')
@@ -180,16 +183,17 @@ if __name__ == '__main__':
 
     """Make a scatterplot of the actual vs. predicted values on new data."""
     def make_scatterplot_figure():
-        fig = plt.figure()
+        fig = plt.figure(figsize=(4, 4))
         ax = fig.add_subplot(111)
         ax.scatter(actual, preds, color='red', label='predictions')
         ax.set_xlabel('actual')
         ax.set_ylabel('predictions')
         ax.plot(*y_equals_x(actual), color='red')  # this is the y=x line
-        ax.legend()
+        plt.subplots_adjust(bottom=0.2, left=0.25, top=0.9, right=0.92)
         plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-preds_vs_actual.pdf'
                     .format(func_name, num_iters, n_feats, arch))
         # plt.show()
 
     if make_plots:
         make_scatterplot_figure()
+        make_training_loss_figure()

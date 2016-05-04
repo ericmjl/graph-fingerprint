@@ -18,9 +18,8 @@ from time import time
 from autograd import grad
 from graphfp.layers import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
     LinearRegressionLayer
-from graphfp.wb2 import WeightsAndBiases
 from graphfp.flatten import flatten
-from graphfp.optimizers import sgd, adam
+from graphfp.optimizers import adam
 from graphfp.utils import batch_sample, y_equals_x, initialize_network
 # from autograd.util import check_grads
 

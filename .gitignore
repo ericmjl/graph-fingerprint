@@ -1,3 +1,6 @@
+# Mac OS X files
+**.DS_Store
+
 # Experiment figures
 experiments/figures/*
 experiments/figures_*

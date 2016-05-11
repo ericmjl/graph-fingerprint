@@ -11,13 +11,14 @@ import graphfp.custom_funcs as cf
 import matplotlib.pyplot as plt
 import sys
 import seaborn
+import os
 
 from sklearn.preprocessing import LabelBinarizer
 from random import sample, choice
 from time import time
 from autograd import grad
 from graphfp.layers import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
-    LinearRegressionLayer
+    LinearRegressionLayer, FullyConnectedLayer
 from graphfp.flatten import flatten
 from graphfp.optimizers import adam
 from graphfp.utils import batch_sample, y_equals_x, initialize_network
@@ -44,7 +45,7 @@ def predict(wb_struct, inputs, graphs):
     return curr_inputs
 
 
-def train_loss(wb_vect, unflattener, batch=True, batch_size=10):
+def train_loss(wb_vect, unflattener, batch=True, batch_size=1):
     """
     Training loss is MSE.
 
@@ -138,6 +139,11 @@ if __name__ == '__main__':
                               FingerprintLayer(2*n_feats),
                               LinearRegressionLayer(shape=(2*n_feats, 1))]
 
+    lyr_dict['full_connect'] = [GraphConvLayer((n_feats, n_feats)),
+                                FingerprintLayer(n_feats),
+                                FullyConnectedLayer((n_feats, n_feats)),
+                                LinearRegressionLayer((n_feats, 1))]
+
     layers = lyr_dict[arch]
 
     gradfunc = grad(train_loss)
@@ -193,6 +199,11 @@ if __name__ == '__main__':
                     .format(func_name, num_iters, n_feats, arch))
         # plt.show()
 
+    def make_dir(dirname):
+        if not os.path.exists(dirname):
+            os.mkdir(dirname)
+
     if make_plots:
+        make_dir('figures')
         make_scatterplot_figure()
         make_training_loss_figure()

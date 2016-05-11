@@ -13,6 +13,7 @@ import sys
 import seaborn
 import os
 
+from numba import jit
 from sklearn.preprocessing import LabelBinarizer
 from random import sample, choice
 from time import time
@@ -22,11 +23,11 @@ from graphfp.layers import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
 from graphfp.flatten import flatten
 from graphfp.optimizers import adam
 from graphfp.utils import batch_sample, y_equals_x, initialize_network
-# from autograd.util import check_grads
 
 seaborn.set_context('poster')
 
 
+@jit
 def predict(wb_struct, inputs, graphs):
     """
     Makes predictions by running the forward pass over all of the layers.
@@ -97,6 +98,7 @@ if __name__ == '__main__':
 
         $ python nnet_arch.py cf.score fp_linear 500 10 True
     """
+    start = time()
     func_name = sys.argv[1]
     score_func = eval(sys.argv[1])
     arch = sys.argv[2]
@@ -207,3 +209,6 @@ if __name__ == '__main__':
         make_dir('figures')
         make_scatterplot_figure()
         make_training_loss_figure()
+
+    end = time()
+    print(end - start)

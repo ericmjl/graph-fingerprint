@@ -101,6 +101,14 @@ if __name__ == '__main__':
     The signature at the command line will look like:
 
         $ python nnet_arch.py cf.score fp_linear 500 10 True
+
+    The arguments are:
+    - nnet_arch.py:  the script
+    - cf.score:      the scoring function
+    - fp_linear:     the network architecture
+    - 500:           the number of iterations
+    - 10:            the maximum graph size
+    - True:          whether or not to make a figure
     """
     start = time()
     func_name = sys.argv[1]

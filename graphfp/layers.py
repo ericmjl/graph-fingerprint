@@ -92,7 +92,8 @@ class GraphConvLayer(object):
         Parameters:
         ===========
         - inputs: (np.array) the output from the previous layer.
-        - graphs: (list) of nx.Graph objects.
+        - graphs: (list) of nx.Graph objects.  TODO: Change to a dictionary of
+                  {node: [self and neighbors]}
         """
         def stacked_neighbor_activations(inputs, graphs):
             """

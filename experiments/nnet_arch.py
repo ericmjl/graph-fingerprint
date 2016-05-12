@@ -13,7 +13,6 @@ import sys
 import seaborn
 import os
 
-from numba import jit
 from sklearn.preprocessing import LabelBinarizer
 from random import sample, choice
 from time import time
@@ -27,7 +26,6 @@ from graphfp.utils import batch_sample, y_equals_x, initialize_network
 seaborn.set_context('poster')
 
 
-@jit
 def predict(wb_struct, inputs, graphs):
     """
     Makes predictions by running the forward pass over all of the layers.
@@ -37,6 +35,8 @@ def predict(wb_struct, inputs, graphs):
     - wb_struct: a dictionary of weights and biases stored for each layer.
     - inputs: the input data matrix. should be one row per graph.
     - graphs: a list of all graphs.
+
+    Adding autojit decorator does not speed up code.
     """
     curr_inputs = inputs
 
@@ -51,6 +51,8 @@ def train_loss(wb_vect, unflattener, batch=True, batch_size=1):
     Training loss is MSE.
 
     We pass in a flattened parameter vector and its unflattener.
+
+    DO NOT JIT this function, it crashes.
     """
     wb_struct = unflattener(wb_vect)
 
@@ -72,6 +74,8 @@ def train_loss(wb_vect, unflattener, batch=True, batch_size=1):
 def callback(wb, i):
     """
     Any function you want to run at each iteration of the optimization.
+
+    Adding autojit decorator does not speed this up.
     """
     start = time()
     wb_vect, wb_unflattener = flatten(wb)

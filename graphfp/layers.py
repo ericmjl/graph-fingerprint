@@ -79,7 +79,6 @@ class GraphConvLayer(object):
         - kernel_shape: (2-tuple) of n_rows, n_cols. n_rows should correspond
                         to the number of columns for the matrix returned in
                         the previous layer.
-        - nonlinearity: a nonlinearity function from the nonlinearity module.
         """
         self.kernel_shape = kernel_shape
         self.wb = WeightsAndBiases()

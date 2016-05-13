@@ -70,7 +70,7 @@ class GraphConvLayer(object):
     """
     A graph convolution layer. Convolution operation is:
 
-      node_activations @ node_weights + nbr_activations @ nbr_weights + bias
+        [self + nbrs] (shape=(1row x n_feats)) @ weights + bias
     """
     def __init__(self, kernel_shape):
         """

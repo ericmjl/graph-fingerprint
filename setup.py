@@ -17,8 +17,8 @@ setup(
     version="0.1",
     author="Eric J. Ma",
     author_email="ericmajinglong@gmail.com",
-    description=("A neural network package for doing deep learning on\
- graphs."),
+    description=("A package for doing deep learning on graph-structured data."
+                 ),
     license="MIT",
     keywords="neural network, graphs, deep learning, autograd",
     url="http://packages.python.org/an_example_pypi_project",

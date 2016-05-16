@@ -36,6 +36,10 @@ def predict(wb_struct, inputs, nodes_nbrs, graph_idxs):
     - inputs: the input data matrix. should be one row per graph.
     - graphs: a list of all graphs.
 
+    Internal Variables:
+    ===================
+    - layers: the list of layer specifications.
+
     Adding autojit decorator does not speed up code.
     """
     curr_inputs = inputs
@@ -84,7 +88,6 @@ def callback(wb, i):
     start = time()
     wb_vect, wb_unflattener = flatten(wb)
     print('Epoch: {0}'.format(i))
-    # print('Computing gradient w.r.t. weights...')
 
     print('Training Loss: ')
 

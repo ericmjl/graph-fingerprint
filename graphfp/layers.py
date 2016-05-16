@@ -22,9 +22,10 @@ class GraphInputLayer(object):
         Returns a list of indices of each of the graph's nodes, and a
         list of indices of each of the graph's node's neighbors.
 
-        There are two lists:
-        1. A list of nodes' indices.
-        2. A list of nodes' neighbors' indices.
+        There are 3 lists:
+        1. node_idxs: A list of nodes' indices.
+        2. nbr_idxs: A list of nodes' neighbors' indices.
+        3. graph_idxs: A list of graphs' indices.
 
         With the addition of this function, we can avoid doing iteration on
         graphs on each pass, thus speeding up each epoch.

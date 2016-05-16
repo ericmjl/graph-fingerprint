@@ -26,7 +26,7 @@ from graphfp.utils import batch_sample, y_equals_x, initialize_network
 seaborn.set_context('poster')
 
 
-def predict(wb_struct, inputs, graphs):
+def predict(wb_struct, inputs, nodes_nbrs, graph_idxs):
     """
     Makes predictions by running the forward pass over all of the layers.
 
@@ -42,7 +42,10 @@ def predict(wb_struct, inputs, graphs):
 
     for i, layer in enumerate(layers):
         wb = wb_struct['layer{0}_{1}'.format(i, layer)]
-        curr_inputs = layer.forward_pass(wb, curr_inputs, graphs)
+        curr_inputs = layer.forward_pass(wb,
+                                         curr_inputs,
+                                         nodes_nbrs,
+                                         graph_idxs)
     return curr_inputs
 
 
@@ -61,9 +64,10 @@ def train_loss(wb_vect, unflattener, batch=True, batch_size=1):
     else:
         batch_size = len(graphs)
 
-    samp_graphs, samp_inputs = batch_sample(graphs, input_shape, batch_size)
+    samp_graphs, samp_inputs, samp_nodes_nbrs, samp_graph_idxs = batch_sample(
+        graphs, input_shape, batch_size)
 
-    preds = predict(wb_struct, samp_inputs, samp_graphs)
+    preds = predict(wb_struct, samp_inputs, samp_nodes_nbrs, samp_graph_idxs)
     graph_scores = np.array([float(score_func(g)) for g in samp_graphs]).\
         reshape((len(samp_graphs), 1))
 
@@ -180,7 +184,9 @@ if __name__ == '__main__':
         plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-training_loss.pdf'
                     .format(func_name, num_iters, n_feats, arch))
 
-    inputs = GraphInputLayer(input_shape).forward_pass(graphs)
+    inputs, nodes_nbrs, graph_idxs = GraphInputLayer(input_shape).\
+        forward_pass(graphs)
+
     print('Final training loss:')
     print(train_loss(wb_vect, wb_unflattener))
 
@@ -194,9 +200,10 @@ if __name__ == '__main__':
                                        features_dict=features_dict)
                   for i in range(n_new_graphs)]
 
-    new_inputs = GraphInputLayer(input_shape).forward_pass(new_graphs)
+    new_inputs, new_nodes_nbrs, new_graph_idxs = GraphInputLayer(input_shape).\
+        forward_pass(new_graphs)
 
-    preds = predict(wb_new, new_inputs, new_graphs)
+    preds = predict(wb_new, new_inputs, new_nodes_nbrs, new_graph_idxs)
     actual = np.array([score_func(g) for g in new_graphs]).reshape(
         (len(new_graphs), 1))
 
@@ -223,4 +230,5 @@ if __name__ == '__main__':
         make_training_loss_figure()
 
     end = time()
+    print('\n Total Time:')
     print(end - start)

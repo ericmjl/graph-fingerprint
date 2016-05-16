@@ -17,9 +17,10 @@ def train_test_split(graphs, test_fraction=0.2):
 
 def batch_sample(graphs, input_shape, batch_size=10):
     samp_graphs = sample(graphs, batch_size)
-    samp_inputs = GraphInputLayer(input_shape).forward_pass(samp_graphs)
+    samp_inputs, samp_nodes_nbrs, samp_graph_idxs = GraphInputLayer(
+        input_shape).forward_pass(samp_graphs)
 
-    return samp_graphs, samp_inputs
+    return samp_graphs, samp_inputs, samp_nodes_nbrs, samp_graph_idxs
 
 
 def batch_normalize(x):

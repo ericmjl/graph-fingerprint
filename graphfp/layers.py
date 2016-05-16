@@ -17,37 +17,45 @@ class GraphInputLayer(object):
     def __repr__(self):
         return "InputLayer"
 
-    def graph_indices(self, graphs):
-        """
-        Returns a list of indices of each of the graph's nodes, and a
-        list of indices of each of the graph's node's neighbors.
+    # def graph_indices(self, graphs):
+    #     """
+    #     Returns a list of indices of each of the graph's nodes, and a
+    #     list of indices of each of the graph's node's neighbors.
 
-        There are 3 lists:
-        1. node_idxs: A list of nodes' indices.
-        2. nbr_idxs: A list of nodes' neighbors' indices.
-        3. graph_idxs: A list of graphs' indices.
+    #     There are 3 lists:
+    #     1. node_idxs: A list of nodes' indices.
+    #     2. nbr_idxs: A list of nodes' neighbors' indices.
+    #     3. graph_idxs: A list of graphs' indices.
 
-        With the addition of this function, we can avoid doing iteration on
-        graphs on each pass, thus speeding up each epoch.
-        """
-        node_idxs = []
-        nbr_idxs = dict()
-        graph_idxs = defaultdict(list)
-        for i, g in enumerate(graphs):
-            for n, d in g.nodes(data=True):
-                node_idxs.append(g.node[n]['idx'])
-                graph_idxs[i].append(g.node[n]['idx'])
+    #     With the addition of this function, we can avoid doing iteration on
+    #     graphs on each pass, thus speeding up each epoch.
+    #     """
+    #     node_idxs = []
+    #     nbr_idxs = dict()
+    #     graph_idxs = defaultdict(list)
+    #     for i, g in enumerate(graphs):
+    #         for n, d in g.nodes(data=True):
+    #             node_idxs.append(g.node[n]['idx'])
+    #             graph_idxs[i].append(g.node[n]['idx'])
 
-                nbrs = []
-                for nbr in g.neighbors(n):
-                    nbrs.append(g.node[nbr]['idx'])
-                nbr_idxs[g.node[n]['idx']] = nbrs
-        return node_idxs, nbr_idxs, graph_idxs
+    #             nbrs = []
+    #             for nbr in g.neighbors(n):
+    #                 nbrs.append(g.node[nbr]['idx'])
+    #             nbr_idxs[g.node[n]['idx']] = nbrs
+    #     return node_idxs, nbr_idxs, graph_idxs
 
     def forward_pass(self, graphs):
         """
-        Returns the nodes' features stacked together.
+        Returns the nodes' features stacked together, along with a dictionary
+        of nodes and their neighbors.
+
+        An example structure is:
+        - {1: [1, 2 , 4],
+           2: [2, 1],
+           ...
+           }
         """
+        # First off, we label each node with the index of each node's data.
         features = []
         i = 0
         for g in graphs:
@@ -56,7 +64,22 @@ class GraphInputLayer(object):
                 g.node[n]['idx'] = i
                 i += 1
 
-        return np.vstack(features)
+        # We then do a second pass over the graphs, and record each node and
+        # their neighbors' indices in the stacked features array.
+        #
+        # We also record the indices corresponding to each graph.
+        nodes_nbrs = defaultdict(list)
+        graph_idxs = defaultdict(list)
+        for idx, g in enumerate(graphs):
+            g.graph['idx'] = idx  # set the graph's index attribute.
+            for n, d in g.nodes(data=True):
+                nodes_nbrs[d['idx']].append(d['idx'])
+                graph_idxs[idx].append(d['idx'])  # append node index to list
+                                                  # of graph's nodes indices.
+                for nbr in g.neighbors(n):
+                    nodes_nbrs[d['idx']].append(g.node[nbr]['idx'])
+
+        return np.vstack(features), nodes_nbrs, graph_idxs
 
     def build_weights(self, input_shape):
         """
@@ -87,7 +110,7 @@ class GraphConvLayer(object):
     def __repr__(self):
         return "GraphConvLayer"
 
-    def forward_pass(self, wb, inputs, graphs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         """
         Parameters:
         ===========
@@ -95,64 +118,68 @@ class GraphConvLayer(object):
         - graphs: (list) of nx.Graph objects.  TODO: Change to a dictionary of
                   {node: [self and neighbors]}
         """
-        def stacked_neighbor_activations(inputs, graphs):
-            """
-            Inputs:
-            =======
-            - graphs: (list) a list of NetworkX graphs.
-            - inputs: (np.array) the inputs from the previous layer.
+        # def stacked_neighbor_activations(inputs, graphs):
+        #     """
+        #     Inputs:
+        #     =======
+        #     - graphs: (list) a list of NetworkX graphs.
+        #     - inputs: (np.array) the inputs from the previous layer.
 
-            Returns:
-            ========
-            - a stacked numpy array of neighbor activations
-            """
-            nbr_activations = []
+        #     Returns:
+        #     ========
+        #     - a stacked numpy array of neighbor activations
+        #     """
+        #     nbr_activations = []
 
-            for g in graphs:
-                for n in g.nodes():
-                    nbr_acts = neighbor_activations(g, n, inputs)
-                    nbr_activations.append(nbr_acts)
+        #     for g in graphs:
+        #         for n in g.nodes():
+        #             nbr_acts = neighbor_activations(g, n, inputs)
+        #             nbr_activations.append(nbr_acts)
 
-            return np.vstack(nbr_activations)
+        #     return np.vstack(nbr_activations)
 
-        def neighbor_indices(G, n):
-            """
-            Inputs:
-            =======
-            - G: the graph to which the node belongs to.
-            - n: the node inside the graph G.
+        # def neighbor_indices(G, n):
+        #     """
+        #     Inputs:
+        #     =======
+        #     - G: the graph to which the node belongs to.
+        #     - n: the node inside the graph G.
 
-            Returns:
-            ========
-            - indices: (list) a list of indices, which should (but is not
-                       guaranteed to) correspond to a row in a large
-                       stacked matrix of features.
-            """
-            indices = []
-            for n in G.neighbors(n):
-                indices.append(G.node[n]['idx'])
-            return indices
+        #     Returns:
+        #     ========
+        #     - indices: (list) a list of indices, which should (but is not
+        #                guaranteed to) correspond to a row in a large
+        #                stacked matrix of features.
+        #     """
+        #     indices = []
+        #     for n in G.neighbors(n):
+        #         indices.append(G.node[n]['idx'])
+        #     return indices
 
-        def neighbor_activations(G, n, inputs):
-            """
-            Inputs:
-            =======
-            - G: the graph to which the node belongs to.
-            - n: the node inside the graph G
-            - inputs: the outputs from the previous layer.
-            """
-            nbr_indices = neighbor_indices(G, n)
-            # print(nbr_indices)
-            return np.sum(inputs[nbr_indices], axis=0)
+        # def neighbor_activations(G, n, inputs):
+        #     """
+        #     Inputs:
+        #     =======
+        #     - G: the graph to which the node belongs to.
+        #     - n: the node inside the graph G
+        #     - inputs: the outputs from the previous layer.
+        #     """
+        #     nbr_indices = neighbor_indices(G, n)
+        #     # print(nbr_indices)
+        #     return np.sum(inputs[nbr_indices], axis=0)
 
         weights = wb['weights']
         biases = wb['biases']
 
-        self_act = np.dot(inputs, weights)
-        nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
-                         weights)
+        activations = np.zeros(shape=inputs.shape)
+        for n, nbrs in nodes_nbrs.items():
+            activations[n] = np.sum(inputs[nbrs], axis=0)
+
+        # self_act = np.dot(inputs, weights)
+        # nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
+        #                  weights)
         # print('Computing activations...')
-        return relu(self_act + nbr_act + biases)
+        return relu(np.dot(activations, weights) + biases)
 
     def build_weights(self, input_shape):
         """
@@ -189,7 +216,7 @@ class FingerprintLayer(object):
     def __repr__(self):
         return "FingerprintLayer"
 
-    def forward_pass(self, wb, inputs, graphs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         """
         Parameters:
         ===========
@@ -199,8 +226,7 @@ class FingerprintLayer(object):
         """
 
         fingerprints = []
-        for g in graphs:
-            idxs = graph_indices(g)
+        for g, idxs in graph_idxs.items():
             fp = np.sum(inputs[idxs], axis=0)
             fingerprints.append(fp)
 
@@ -218,45 +244,45 @@ class FingerprintLayer(object):
         return output_shape, self.wb
 
 
-class MaxPoolLayer(object):
-    """
-    A maxpool layer.
-    """
+# class MaxPoolLayer(object):
+#     """
+#     A maxpool layer.
+#     """
 
-    def __init__(self):
-        # self.shape = shape
-        self.wb = WeightsAndBiases()
+#     def __init__(self):
+#         # self.shape = shape
+#         self.wb = WeightsAndBiases()
 
-    def __repr__(self):
-        return "MaxPoolLayer"
+#     def __repr__(self):
+#         return "MaxPoolLayer"
 
-    def forward_pass(self, wb, inputs, graphs):
-        """
-        For each node and its neighbors, identify the node that has the
-        maximum sum of features to be designated as their representative.
-        """
+#     def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
+#         """
+#         For each node and its neighbors, identify the node that has the
+#         maximum sum of features to be designated as their representative.
+#         """
 
-        outputs = np.zeros(shape=inputs.shape)
-        for g in graphs:
-            # g_idxs = graph_indices(g)
-            for n, d in g.nodes(data=True):
-                sum_feat = np.sum(d['features'])
-                # max_idx = g.node[n]['idx']
-                idxs = [d['idx']]
-                for nbr in g.neighbors(n):
-                    nbr_idx = g.node[nbr]['idx']
-                    idxs.append(nbr_idx)
-                    nbr_sumfeat = np.sum(g.node[nbr]['features'])
-                    if nbr_sumfeat > sum_feat:
-                        sum_feat = nbr_sumfeat
-                        # max_idx = nbr_idx
-                outputs[idxs] = sum_feat
+#         outputs = np.zeros(shape=inputs.shape)
+#         for g in graphs:
+#             # g_idxs = graph_indices(g)
+#             for n, d in g.nodes(data=True):
+#                 sum_feat = np.sum(d['features'])
+#                 # max_idx = g.node[n]['idx']
+#                 idxs = [d['idx']]
+#                 for nbr in g.neighbors(n):
+#                     nbr_idx = g.node[nbr]['idx']
+#                     idxs.append(nbr_idx)
+#                     nbr_sumfeat = np.sum(g.node[nbr]['features'])
+#                     if nbr_sumfeat > sum_feat:
+#                         sum_feat = nbr_sumfeat
+#                         # max_idx = nbr_idx
+#                 outputs[idxs] = sum_feat
 
-        return relu(outputs)
+#         return relu(outputs)
 
-    def build_weights(self, input_shape):
-        self.wb.add('weights', shape=input_shape)
-        return input_shape, self.wb
+#     def build_weights(self, input_shape):
+#         self.wb.add('weights', shape=input_shape)
+#         return input_shape, self.wb
 
 
 class FullyConnectedLayer(object):
@@ -271,7 +297,7 @@ class FullyConnectedLayer(object):
     def __repr__(self):
         return "FullyConnectedLayer"
 
-    def forward_pass(self, wb, inputs, graphs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return relu(np.dot(inputs, wb['weights']) + wb['bias'])
 
     def build_weights(self, input_shape):
@@ -294,7 +320,7 @@ class DropoutLayer(object):
     def __repr__(self):
         return "DropoutLayer"
 
-    def forward_pass(self, wb, inputs, graphs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return inputs * npr.binomial(1, self.p, size=(inputs.shape))
 
     def build_weights(self, input_shape):
@@ -313,7 +339,7 @@ class LinearRegressionLayer(object):
     def __repr__(self):
         return "LinearRegressionLayer"
 
-    def forward_pass(self, wb, inputs, graphs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return np.dot(inputs, wb['linweights']) + wb['bias']
 
     def build_weights(self, input_shape):

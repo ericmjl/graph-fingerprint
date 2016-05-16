@@ -1,6 +1,6 @@
 from autograd import numpy as np
 import autograd.numpy.random as npr
-from .wb2 import WeightsAndBiases
+from .wb import WeightsAndBiases
 from collections import defaultdict
 from .custom_funcs import graph_indices
 from .nonlinearity import relu

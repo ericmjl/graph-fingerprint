@@ -1,7 +1,7 @@
 from random import sample
 from .layers import GraphInputLayer
 import math
-from .wb2 import WeightsAndBiases
+from .wb import WeightsAndBiases
 import autograd.numpy as np
 
 

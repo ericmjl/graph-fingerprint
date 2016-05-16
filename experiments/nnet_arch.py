@@ -19,7 +19,7 @@ from time import time
 from autograd import grad
 from graphfp.layers import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
     LinearRegressionLayer, FullyConnectedLayer
-from graphfp.flatten import flatten
+from pyflatten import flatten
 from graphfp.optimizers import adam
 from graphfp.utils import batch_sample, y_equals_x, initialize_network
 

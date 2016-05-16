@@ -1,0 +1,12 @@
+name: build-test
+dependencies:
+- numpy
+- networkx
+- pyflatten
+- matplotlib
+- seaborn
+- setuptools
+- scikit-learn
+- pip:
+  - pytest
+  - autograd

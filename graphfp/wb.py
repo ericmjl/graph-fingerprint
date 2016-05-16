@@ -1,4 +1,4 @@
-from flatten import flatten
+from pyflatten import flatten
 import autograd.numpy.random as npr
 
 

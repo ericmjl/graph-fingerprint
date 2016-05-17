@@ -53,7 +53,7 @@ def predict(wb_struct, inputs, nodes_nbrs, graph_idxs):
     return curr_inputs
 
 
-def train_loss(wb_vect, unflattener, batch=True, batch_size=1):
+def train_loss(wb_vect, unflattener, batch=True, batch_size=10):
     """
     Training loss is MSE.
 

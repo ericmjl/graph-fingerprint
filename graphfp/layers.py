@@ -1,8 +1,8 @@
 from autograd import numpy as np
+from autograd.core import getval
 import autograd.numpy.random as npr
 from .wb import WeightsAndBiases
 from collections import defaultdict
-from .custom_funcs import graph_indices
 from .nonlinearity import relu
 
 
@@ -173,7 +173,7 @@ class GraphConvLayer(object):
 
         activations = np.zeros(shape=inputs.shape)
         for n, nbrs in nodes_nbrs.items():
-            activations[n] = np.sum(inputs[nbrs], axis=0)
+            activations[n] = np.sum(getval(inputs[nbrs]), axis=0)
 
         # self_act = np.dot(inputs, weights)
         # nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),

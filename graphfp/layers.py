@@ -17,33 +17,6 @@ class GraphInputLayer(object):
     def __repr__(self):
         return "InputLayer"
 
-    # def graph_indices(self, graphs):
-    #     """
-    #     Returns a list of indices of each of the graph's nodes, and a
-    #     list of indices of each of the graph's node's neighbors.
-
-    #     There are 3 lists:
-    #     1. node_idxs: A list of nodes' indices.
-    #     2. nbr_idxs: A list of nodes' neighbors' indices.
-    #     3. graph_idxs: A list of graphs' indices.
-
-    #     With the addition of this function, we can avoid doing iteration on
-    #     graphs on each pass, thus speeding up each epoch.
-    #     """
-    #     node_idxs = []
-    #     nbr_idxs = dict()
-    #     graph_idxs = defaultdict(list)
-    #     for i, g in enumerate(graphs):
-    #         for n, d in g.nodes(data=True):
-    #             node_idxs.append(g.node[n]['idx'])
-    #             graph_idxs[i].append(g.node[n]['idx'])
-
-    #             nbrs = []
-    #             for nbr in g.neighbors(n):
-    #                 nbrs.append(g.node[nbr]['idx'])
-    #             nbr_idxs[g.node[n]['idx']] = nbrs
-    #     return node_idxs, nbr_idxs, graph_idxs
-
     def forward_pass(self, graphs):
         """
         Returns the nodes' features stacked together, along with a dictionary
@@ -118,55 +91,6 @@ class GraphConvLayer(object):
         - graphs: (list) of nx.Graph objects.  TODO: Change to a dictionary of
                   {node: [self and neighbors]}
         """
-        # def stacked_neighbor_activations(inputs, graphs):
-        #     """
-        #     Inputs:
-        #     =======
-        #     - graphs: (list) a list of NetworkX graphs.
-        #     - inputs: (np.array) the inputs from the previous layer.
-
-        #     Returns:
-        #     ========
-        #     - a stacked numpy array of neighbor activations
-        #     """
-        #     nbr_activations = []
-
-        #     for g in graphs:
-        #         for n in g.nodes():
-        #             nbr_acts = neighbor_activations(g, n, inputs)
-        #             nbr_activations.append(nbr_acts)
-
-        #     return np.vstack(nbr_activations)
-
-        # def neighbor_indices(G, n):
-        #     """
-        #     Inputs:
-        #     =======
-        #     - G: the graph to which the node belongs to.
-        #     - n: the node inside the graph G.
-
-        #     Returns:
-        #     ========
-        #     - indices: (list) a list of indices, which should (but is not
-        #                guaranteed to) correspond to a row in a large
-        #                stacked matrix of features.
-        #     """
-        #     indices = []
-        #     for n in G.neighbors(n):
-        #         indices.append(G.node[n]['idx'])
-        #     return indices
-
-        # def neighbor_activations(G, n, inputs):
-        #     """
-        #     Inputs:
-        #     =======
-        #     - G: the graph to which the node belongs to.
-        #     - n: the node inside the graph G
-        #     - inputs: the outputs from the previous layer.
-        #     """
-        #     nbr_indices = neighbor_indices(G, n)
-        #     # print(nbr_indices)
-        #     return np.sum(inputs[nbr_indices], axis=0)
 
         weights = wb['weights']
         biases = wb['biases']
@@ -175,10 +99,6 @@ class GraphConvLayer(object):
         for n, nbrs in nodes_nbrs.items():
             activations[n] = np.sum(getval(inputs[nbrs]), axis=0)
 
-        # self_act = np.dot(inputs, weights)
-        # nbr_act = np.dot(stacked_neighbor_activations(inputs, graphs),
-        #                  weights)
-        # print('Computing activations...')
         return relu(np.dot(activations, weights) + biases)
 
     def build_weights(self, input_shape):
@@ -191,9 +111,6 @@ class GraphConvLayer(object):
         ========
         - output_shape: (2-tuple) of integers specifying the output shape.
         """
-        # assert input_shape[1] == self.kernel_shape[0],\
-        #     'input_shape dim 1 must be same as kernel_shape dim 0'
-
         self.wb.add(name='weights', shape=self.kernel_shape)
         # self.wb.add(name='nbr_weights', shape=self.kernel_shape)
         self.wb.add(name='biases', shape=(1, self.kernel_shape[1]))
@@ -242,47 +159,6 @@ class FingerprintLayer(object):
         output_shape = (input_shape[0], self.shape)
 
         return output_shape, self.wb
-
-
-# class MaxPoolLayer(object):
-#     """
-#     A maxpool layer.
-#     """
-
-#     def __init__(self):
-#         # self.shape = shape
-#         self.wb = WeightsAndBiases()
-
-#     def __repr__(self):
-#         return "MaxPoolLayer"
-
-#     def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
-#         """
-#         For each node and its neighbors, identify the node that has the
-#         maximum sum of features to be designated as their representative.
-#         """
-
-#         outputs = np.zeros(shape=inputs.shape)
-#         for g in graphs:
-#             # g_idxs = graph_indices(g)
-#             for n, d in g.nodes(data=True):
-#                 sum_feat = np.sum(d['features'])
-#                 # max_idx = g.node[n]['idx']
-#                 idxs = [d['idx']]
-#                 for nbr in g.neighbors(n):
-#                     nbr_idx = g.node[nbr]['idx']
-#                     idxs.append(nbr_idx)
-#                     nbr_sumfeat = np.sum(g.node[nbr]['features'])
-#                     if nbr_sumfeat > sum_feat:
-#                         sum_feat = nbr_sumfeat
-#                         # max_idx = nbr_idx
-#                 outputs[idxs] = sum_feat
-
-#         return relu(outputs)
-
-#     def build_weights(self, input_shape):
-#         self.wb.add('weights', shape=input_shape)
-#         return input_shape, self.wb
 
 
 class FullyConnectedLayer(object):

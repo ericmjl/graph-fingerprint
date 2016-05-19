@@ -44,7 +44,7 @@ def y_equals_x(actual_data):
     return x, y
 
 
-def initialize_network(input_shape, graphs, layers_spec):
+def initialize_network(input_shape, layers_spec):
     """
     Initializes all weights, biases and other parameters to random floats
     between 0 and 1.

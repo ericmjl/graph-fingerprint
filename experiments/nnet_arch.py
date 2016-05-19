@@ -169,7 +169,7 @@ if __name__ == '__main__':
 
     gradfunc = grad(train_loss)
     training_losses = []
-    wb_all = initialize_network(input_shape, graphs, layers)
+    wb_all = initialize_network(input_shape, layers)
 
     """Train on testing data."""
     wb_vect, wb_unflattener = adam(gradfunc, wb_all, callback=callback,

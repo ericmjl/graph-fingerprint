@@ -7,4 +7,4 @@
 #$ -pe whole_nodes 1
 #############################################
 
-python nnet_arch.py two_conv cf.score 50
+python nnet_arch.py cf.score two_conv 5000 50 True

@@ -20,8 +20,7 @@ with open('nnet_master.sh', 'w') as master:
             product(archs, scorefuncs, num_feats)):
         with open('nnet_synth{0}.sh'.format(i), 'w') as f:
             f.write(sge_header)
-            f.write('python nnet_arch.py {0} {1} {2}'.format(arch,
-                                                             scorefunc,
-                                                             nfeats))
+            f.write('python nnet_arch.py {0} {1} 5000 {2} True'
+                    .format(scorefunc, arch, nfeats))
 
         master.write('qsub nnet_synth{0}.sh\n'.format(i))

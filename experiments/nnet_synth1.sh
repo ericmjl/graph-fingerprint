@@ -7,4 +7,4 @@
 #$ -pe whole_nodes 1
 #############################################
 
-python nnet_arch.py fp_linear cf.score 50
+python nnet_arch.py cf.score fp_linear 5000 50 True

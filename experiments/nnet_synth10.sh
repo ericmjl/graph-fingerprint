@@ -7,4 +7,4 @@
 #$ -pe whole_nodes 1
 #############################################
 
-python nnet_arch.py one_conv cf.score_sine 10
+python nnet_arch.py cf.score_sine one_conv 5000 10 True

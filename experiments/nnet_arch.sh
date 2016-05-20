@@ -1,1 +1,1 @@
-python nnet_arch.py cf.score fp_linear 500 10 True
+python nnet_arch.py cf.score fp_linear 5000 10 True

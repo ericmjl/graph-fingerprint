@@ -5,6 +5,8 @@ Date Created: 12 April 2016
 Purpose:
 What functions can we learn with two convolutional layers?
 """
+import matplotlib
+matplotlib.use('Agg')
 
 import numpy as np
 import graphfp.custom_funcs as cf

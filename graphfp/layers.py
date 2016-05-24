@@ -84,11 +84,10 @@ class GraphConvLayer(object):
 
         weights = wb['weights']
         biases = wb['biases']
-        npsum = np.sum
 
         activations = np.zeros(shape=inputs.shape)
         for n, nbrs in sorted(nodes_nbrs.items()):
-            activations[n] = npsum(getval(inputs[nbrs]), axis=0)
+            activations[n] = np.sum(getval(inputs[nbrs]), axis=0)
 
         return relu(np.dot(activations, weights) + biases)
 

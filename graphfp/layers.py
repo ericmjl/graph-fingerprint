@@ -78,8 +78,8 @@ class GraphConvLayer(object):
         Parameters:
         ===========
         - inputs: (np.array) the output from the previous layer.
-        - graphs: (list) of nx.Graph objects.  TODO: Change to a dictionary of
-                  {node: [self and neighbors]}
+        - nodes_nbrs: (dict) keys=node_idxs, values=[self_idxs + nbr_idxs]
+        - graph_idxs: (dict) keys=graph seqids, values=[node_idxs]
         """
 
         weights = wb['weights']

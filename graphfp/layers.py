@@ -78,16 +78,31 @@ class GraphConvLayer(object):
         Parameters:
         ===========
         - inputs: (np.array) the output from the previous layer.
-        - nodes_nbrs: (dict) keys=node_idxs, values=[self_idxs + nbr_idxs]
-        - graph_idxs: (dict) keys=graph seqids, values=[node_idxs]
+        - graphs: (list) of nx.Graph objects.  TODO: Change to a dictionary of
+                  {node: [self and neighbors]}
         """
 
         weights = wb['weights']
         biases = wb['biases']
 
-        activations = np.zeros(shape=inputs.shape)
-        for n, nbrs in sorted(nodes_nbrs.items()):
-            activations[n] = np.sum(getval(inputs[nbrs]), axis=0)
+        ####---------------------#####
+        # # Old Version
+        # npsum = np.sum
+        # activations = np.zeros(shape=inputs.shape)
+        # for n, nbrs in sorted(nodes_nbrs.items()):
+        #     activations[n] = npsum(getval(inputs[nbrs]), axis=0)
+        ####---------------------#####
+
+        ####---------------------#####
+        # New Version from @jakevdp
+        new_nbrs = np.full((inputs.shape[0],
+                            max(map(len, nodes_nbrs.values()))), -1, dtype=int)
+        for i, v in nodes_nbrs.items():
+            new_nbrs[i, :len(v)] = v
+        # add a row of zeros to X
+        new_inputs = np.vstack([inputs, 0 * inputs[0]])
+        activations = new_inputs.take(new_nbrs, 0).sum(1)
+        ####---------------------#####
 
         return relu(np.dot(activations, weights) + biases)
 

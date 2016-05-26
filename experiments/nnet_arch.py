@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import sys
 import seaborn
 import os
+import pickle as pkl
 
 from collections import defaultdict
 from sklearn.preprocessing import LabelBinarizer
@@ -21,7 +22,7 @@ from random import sample, choice
 from time import time
 from autograd import grad
 from graphfp.layers import GraphInputLayer, GraphConvLayer, FingerprintLayer,\
-    LinearRegressionLayer, FullyConnectedLayer
+    LinearRegressionLayer  # , FullyConnectedLayer
 from pyflatten import flatten
 from graphfp.optimizers import adam
 from graphfp.utils import batch_sample, y_equals_x, initialize_network
@@ -268,7 +269,6 @@ if __name__ == '__main__':
         plt.subplots_adjust(bottom=0.2, left=0.25, top=0.9, right=0.92)
         plt.savefig('figures/{3}-{0}-{1}_iters-{2}_feats-preds_vs_actual.pdf'
                     .format(func_name, num_iters, n_feats, arch))
-        # plt.show()
 
     def make_dir(dirname):
         if not os.path.exists(dirname):
@@ -279,6 +279,16 @@ if __name__ == '__main__':
         make_scatterplot_figure()
         make_training_loss_figure()
 
+    # Save the weights and baises to disk.
+    def save_wb():
+        make_dir('wbs')
+        with open('wbs/{3}-{0}-{1}_iters-{2}_wb.pkl'
+                  .format(func_name, num_iters, n_feats, arch), 'wb') as f:
+            pkl.dump(wb_new, f)
+
     end = time()
     print('\n Total Time:')
     print(end - start)
+
+    print('\n Saving weights and biases to disk')
+    save_wb()

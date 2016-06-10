@@ -7,7 +7,6 @@ from binary_dot import csr_binary_dot_left, csr_binary_dot_right
 import binary_matrix_utils as bmu
 import autograd.numpy as np
 from autograd.util import check_grads
-from autograd import grad
 
 binmat = np.array([[1, 0, 0],
                    [0, 0, 1],

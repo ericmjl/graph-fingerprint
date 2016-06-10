@@ -44,7 +44,7 @@ def y_equals_x(actual_data):
     return x, y
 
 
-def initialize_network(input_shape, layers_spec):
+def initialize_network(layers_spec):
     """
     Initializes all weights, biases and other parameters to random floats
     between 0 and 1.
@@ -53,9 +53,8 @@ def initialize_network(input_shape, layers_spec):
     as well.
     """
     wb_all = WeightsAndBiases()
-    curr_shape = input_shape
     for i, layer in enumerate(layers_spec):
-        curr_shape, wb = layer.build_weights(curr_shape)
+        wb = layer.build_weights()
         wb_all['layer{0}_{1}'.format(i, layer)] = wb
 
     return wb_all

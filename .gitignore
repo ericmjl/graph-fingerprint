@@ -1,3 +1,8 @@
+# Automated Outputs
+experiments/*.sh.*
+experiments/**.pkl
+experiments/wbs
+
 # Mac OS X files
 **.DS_Store
 

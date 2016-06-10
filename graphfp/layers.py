@@ -74,6 +74,7 @@ class GraphConvLayer(object):
         return "GraphConvLayer"
 
     def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
         """
         Parameters:
         ===========
@@ -138,6 +139,7 @@ class FingerprintLayer(object):
         return "FingerprintLayer"
 
     def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
         """
         Parameters:
         ===========
@@ -178,6 +180,7 @@ class FullyConnectedLayer(object):
         return "FullyConnectedLayer"
 
     def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
         return relu(np.dot(inputs, wb['weights']) + wb['bias'])
 
     def build_weights(self):
@@ -199,6 +202,7 @@ class DropoutLayer(object):
         return "DropoutLayer"
 
     def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
         return inputs * npr.binomial(1, self.p, size=(inputs.shape))
 
     def build_weights(self):
@@ -219,6 +223,7 @@ class LinearRegressionLayer(object):
         return "LinearRegressionLayer"
 
     def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
         return np.dot(inputs, wb['linweights']) + wb['bias']
 
     def build_weights(self):

@@ -1,7 +1,7 @@
-from binary_matrix_utils import (to_sparse_format,
-                                 sparse_binary_transpose,
-                                 binary_matrix_to_sparse_rows,
-                                 sparse_rows_to_binary_matrix)
+from .binary_matrix_utils import (to_sparse_format,
+                                  sparse_binary_transpose,
+                                  binary_matrix_to_sparse_rows,
+                                  sparse_rows_to_binary_matrix)
 import numpy as np
 
 dct = {0: [0, 1, 2],

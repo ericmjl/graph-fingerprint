@@ -3,8 +3,8 @@ import pyximport
 pyximport.install(setup_args={"include_dirs": numpy.get_include()},
                   reload_support=True)
 
-from binary_dot import csr_binary_dot_left, csr_binary_dot_right
-import binary_matrix_utils as bmu
+from .binary_dot import csr_binary_dot_left, csr_binary_dot_right
+from .binary_matrix_utils import binary_matrix_to_sparse_rows
 import autograd.numpy as np
 from autograd.util import check_grads
 
@@ -13,7 +13,7 @@ binmat = np.array([[1, 0, 0],
                    [0, 1, 0]],
                   dtype=int)
 
-rows, cols = bmu.binary_matrix_to_sparse_rows(binmat)
+rows, cols = binary_matrix_to_sparse_rows(binmat)
 
 feats = np.array([[1., 2., 3.],
                   [4., 5., 6.],

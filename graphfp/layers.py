@@ -4,6 +4,7 @@ import autograd.numpy.random as npr
 from .wb import WeightsAndBiases
 from collections import defaultdict
 from .nonlinearity import relu
+from .binary_dot import csr_binary_dot_left
 
 
 class GraphInputLayer(object):
@@ -103,6 +104,7 @@ class GraphConvLayer(object):
         # new_inputs = np.vstack([inputs, 0 * inputs[0]])
         # activations = new_inputs.take(new_nbrs, 0).sum(1)
         ####---------------------#####
+        activations = csr_binary_dot_left(inputs, nodes_rows, nodes_cols)
 
         return relu(np.dot(activations, weights) + biases)
 

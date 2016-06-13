@@ -4,8 +4,7 @@ import autograd.numpy.random as npr
 from .wb import WeightsAndBiases
 from collections import defaultdict
 from .nonlinearity import relu
-from .binary_dot import csr_binary_dot_left
-import gc
+
 
 
 class GraphInputLayer(object):
@@ -56,6 +55,14 @@ class GraphInputLayer(object):
 
         return np.vstack(features), nodes_nbrs, graph_idxs
 
+    def build_weights(self, input_shape):
+        """
+        Returns the output shape.
+        """
+        output_shape = self.forward_pass().shape
+
+        return output_shape, self.wb
+
 
 class GraphConvLayer(object):
     """
@@ -63,19 +70,21 @@ class GraphConvLayer(object):
 
         [self + nbrs] (shape=(1row x n_feats)) @ weights + bias
     """
-    def __init__(self, weights_shape, biases_shape):
+    def __init__(self, shape):
         """
         Parameters:
         ===========
+        - shape: (2-tuple) of n_rows, n_cols. n_rows should correspond
+                        to the number of columns for the matrix returned in
+                        the previous layer.
         """
-        self.weights_shape = weights_shape
-        self.biases_shape = biases_shape
+        self.shape = shape
         self.wb = WeightsAndBiases()
 
     def __repr__(self):
         return "GraphConvLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         """
         Parameters:
         ===========
@@ -87,29 +96,13 @@ class GraphConvLayer(object):
         weights = wb['weights']
         biases = wb['biases']
 
-        ####---------------------#####
-        # Old Version
-        # npsum = np.sum
-        # activations = np.zeros(shape=inputs.shape)
-        # for n, nbrs in sorted(nodes_nbrs.items()):
-        #     activations[n] = npsum(getval(inputs[nbrs]), axis=0)
-        ####---------------------#####
-
-        ####---------------------#####
-        # New Version from @jakevdp
-        # new_nbrs = np.full((inputs.shape[0],
-        #                     max(map(len, nodes_nbrs.values()))), -1, dtype=int)
-        # for i, v in nodes_nbrs.items():
-        #     new_nbrs[i, :len(v)] = v
-        # # add a row of zeros to X
-        # new_inputs = np.vstack([inputs, 0 * inputs[0]])
-        # activations = new_inputs.take(new_nbrs, 0).sum(1)
-        ####---------------------#####
-        activations = csr_binary_dot_left(inputs, nodes_rows, nodes_cols)
+        activations = np.zeros(shape=inputs.shape)
+        for n, nbrs in nodes_nbrs.items():
+            activations[n] = np.sum(getval(inputs[nbrs]), axis=0)
 
         return relu(np.dot(activations, weights) + biases)
 
-    def build_weights(self):
+    def build_weights(self, input_shape):
         """
         Parameters:
         ===========
@@ -119,28 +112,29 @@ class GraphConvLayer(object):
         ========
         - output_shape: (2-tuple) of integers specifying the output shape.
         """
-        self.wb.add(name='weights', shape=self.weights_shape)
+        self.wb.add(name='weights', shape=self.kernel_shape)
         # self.wb.add(name='nbr_weights', shape=self.kernel_shape)
-        self.wb.add(name='biases', shape=self.biases_shape)
+        self.wb.add(name='biases', shape=(1, self.kernel_shape[1]))
 
-        return self.wb
+        output_shape = (input_shape[0], self.kernel_shape[1])
+
+        return output_shape, self.wb
 
 
 class FingerprintLayer(object):
-    def __init__(self, weights_shape, biases_shape):
+    def __init__(self, shape):
         """
         Parameters:
         ===========
         - shape: int: the length of the fingerprint.
         """
-        self.weights_shape = weights_shape
-        self.biases_shape = biases_shape
+        self.shape = shape
         self.wb = WeightsAndBiases()
 
     def __repr__(self):
         return "FingerprintLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         """
         Parameters:
         ===========
@@ -150,21 +144,22 @@ class FingerprintLayer(object):
         """
 
         fingerprints = []
-        for g, idxs in sorted(graph_idxs.items()):
+        for g, idxs in graph_idxs.items():
             fp = np.sum(inputs[idxs], axis=0)
             fingerprints.append(fp)
 
-        assert len(fingerprints) == len(graph_idxs)
         return np.vstack(fingerprints)
 
-    def build_weights(self):
+    def build_weights(self, input_shape):
         """
         Builds the fingerprint. The shape of the fingerprint does not
         necessarily have to be the same as the initial feature vector.
         """
-        self.wb.add('weights', shape=self.weights_shape)
+        self.wb.add('weights', shape=(input_shape[0], self.shape))
 
-        return self.wb
+        output_shape = (input_shape[0], self.shape)
+
+        return output_shape, self.wb
 
 
 class FullyConnectedLayer(object):
@@ -172,21 +167,22 @@ class FullyConnectedLayer(object):
     A fully connected layer.
     """
 
-    def __init__(self, weights_shape, biases_shape):
-        self.weights_shape = weights_shape
-        self.biases_shape = biases_shape
+    def __init__(self, shape):
+        self.shape = shape
         self.wb = WeightsAndBiases()
 
     def __repr__(self):
         return "FullyConnectedLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return relu(np.dot(inputs, wb['weights']) + wb['bias'])
 
-    def build_weights(self):
-        self.wb.add('weights', shape=self.weights_shape)
-        self.wb.add('bias', shape=self.biases_shape)
-        return self.wb
+    def build_weights(self, input_shape):
+        self.wb.add('weights', shape=self.shape)
+        output_shape = (input_shape[0], self.shape[1])
+        self.wb.add('bias', shape=output_shape)
+
+        return output_shape, self.wb
 
 
 class DropoutLayer(object):
@@ -201,31 +197,32 @@ class DropoutLayer(object):
     def __repr__(self):
         return "DropoutLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return inputs * npr.binomial(1, self.p, size=(inputs.shape))
 
-    def build_weights(self):
-        self.wb.add('weights', shape=(1, 1))
-        return self.wb
+    def build_weights(self, input_shape):
+        self.wb.add('weights', shape=input_shape)
+        return input_shape, self.wb
 
 
 class LinearRegressionLayer(object):
     """
     Linear regression layer.
     """
-    def __init__(self, weights_shape, biases_shape):
-        self.weights_shape = weights_shape
-        self.biases_shape = biases_shape
+    def __init__(self, shape):
+        self.shape = shape
         self.wb = WeightsAndBiases()
 
     def __repr__(self):
         return "LinearRegressionLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return np.dot(inputs, wb['linweights']) + wb['bias']
 
-    def build_weights(self):
-        self.wb.add('linweights', shape=self.weights_shape)
-        self.wb.add('bias', shape=self.biases_shape)
+    def build_weights(self, input_shape):
+        self.wb.add('linweights', shape=self.shape)
+        output_shape = (input_shape[0], self.shape[1])
 
-        return self.wb
+        self.wb.add('bias', shape=output_shape)
+
+        return output_shape, self.wb

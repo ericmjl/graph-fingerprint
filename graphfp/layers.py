@@ -5,6 +5,7 @@ from .wb import WeightsAndBiases
 from collections import defaultdict
 from .nonlinearity import relu
 from .binary_dot import csr_binary_dot_left
+import gc
 
 
 class GraphInputLayer(object):
@@ -88,10 +89,10 @@ class GraphConvLayer(object):
 
         ####---------------------#####
         # Old Version
-        npsum = np.sum
-        activations = np.zeros(shape=inputs.shape)
-        for n, nbrs in sorted(nodes_nbrs.items()):
-            activations[n] = npsum(getval(inputs[nbrs]), axis=0)
+        # npsum = np.sum
+        # activations = np.zeros(shape=inputs.shape)
+        # for n, nbrs in sorted(nodes_nbrs.items()):
+        #     activations[n] = npsum(getval(inputs[nbrs]), axis=0)
         ####---------------------#####
 
         ####---------------------#####

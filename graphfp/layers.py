@@ -6,6 +6,7 @@ from collections import defaultdict
 from .nonlinearity import relu
 from .binary_dot import csr_binary_dot_left
 import gc
+from .sparse_bindot import bindot_left
 
 
 class GraphInputLayer(object):
@@ -75,7 +76,7 @@ class GraphConvLayer(object):
     def __repr__(self):
         return "GraphConvLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         """
         Parameters:
         ===========
@@ -105,7 +106,8 @@ class GraphConvLayer(object):
         # new_inputs = np.vstack([inputs, 0 * inputs[0]])
         # activations = new_inputs.take(new_nbrs, 0).sum(1)
         ####---------------------#####
-        activations = csr_binary_dot_left(inputs, nodes_rows, nodes_cols)
+        # activations = csr_binary_dot_left(inputs, nodes_rows, nodes_cols)
+        activations = bindot_left(inputs, nodes_nbrs)
 
         return relu(np.dot(activations, weights) + biases)
 
@@ -140,7 +142,7 @@ class FingerprintLayer(object):
     def __repr__(self):
         return "FingerprintLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         """
         Parameters:
         ===========
@@ -180,7 +182,7 @@ class FullyConnectedLayer(object):
     def __repr__(self):
         return "FullyConnectedLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return relu(np.dot(inputs, wb['weights']) + wb['bias'])
 
     def build_weights(self):
@@ -201,7 +203,7 @@ class DropoutLayer(object):
     def __repr__(self):
         return "DropoutLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return inputs * npr.binomial(1, self.p, size=(inputs.shape))
 
     def build_weights(self):
@@ -221,7 +223,7 @@ class LinearRegressionLayer(object):
     def __repr__(self):
         return "LinearRegressionLayer"
 
-    def forward_pass(self, wb, inputs, nodes_rows, nodes_cols, graph_idxs):
+    def forward_pass(self, wb, inputs, nodes_nbrs, graph_idxs):
         return np.dot(inputs, wb['linweights']) + wb['bias']
 
     def build_weights(self):

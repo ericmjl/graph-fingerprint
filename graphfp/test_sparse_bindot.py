@@ -23,7 +23,6 @@ def test_gradient_bindot_left():
         result = bindot_left(feats, sparse_binmat)
         return np.sum(result)
 
-    # gradfunc = grad(sum_csr_binary_dot_left)
     check_grads(sum_bindot_left, feats)
 
 

@@ -1,12 +1,22 @@
 import operator as op
 import numpy as np
+from scipy.sparse import csr_matrix
 
 
 def to_sparse_format(dct):
     rows, cols = zip(*sorted(dct.items(), key=op.itemgetter(0)))
     rows = np.repeat(rows, list(map(len, cols)))
     cols = np.concatenate(cols)
-    return rows.astype('int32'), cols.astype('int32')
+    ones = np.ones(cols.shape)
+    return rows.astype('int32'), cols.astype('int32'), ones.astype('int32')
+
+
+def to_scipy_csr_matrix(dct, shape):
+    """
+    Uses the to_sparse_format function to convert to scipy's CSR format.
+    """
+    rows, cols, ones = to_sparse_format(dct)
+    return csr_matrix(ones, (rows, cols), shape=shape)
 
 
 def sparse_binary_transpose(rows, cols):

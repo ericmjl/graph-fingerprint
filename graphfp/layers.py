@@ -4,6 +4,7 @@ from .wb import WeightsAndBiases
 from collections import defaultdict
 from .nonlinearity import relu
 from .sparse_bindot import bindot_left
+from autograd.util import getval
 
 
 class GraphInputLayer(object):
@@ -103,7 +104,7 @@ class GraphConvLayer(object):
         # new_inputs = np.vstack([inputs, 0 * inputs[0]])
         # activations = new_inputs.take(new_nbrs, 0).sum(1)
         ####---------------------#####
-        # activations = csr_binary_dot_left(inputs, nodes_rows, nodes_cols)
+        # Yet another different version, using my own defined bindot left.
         activations = bindot_left(inputs, nodes_nbrs)
 
         return relu(np.dot(activations, weights) + biases)

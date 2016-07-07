@@ -1,5 +1,6 @@
 from pyflatten import flatten
 import autograd.numpy as np
+import gc
 
 
 def sgd(gradfunc, wb, callback=None, num_iters=200,
@@ -48,5 +49,7 @@ def adam(grad, wb, callback=None, num_iters=100,
         mhat = m / (1 - b1**(i + 1))    # Bias correction.
         vhat = v / (1 - b2**(i + 1))
         wb_vect -= step_size*mhat/(np.sqrt(vhat) + eps)
+
+    gc.collect()
 
     return wb_vect, wb_unflattener

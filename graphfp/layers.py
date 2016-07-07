@@ -4,7 +4,6 @@ from .wb import WeightsAndBiases
 from collections import defaultdict
 from .nonlinearity import relu
 from .sparse_bindot import bindot_left
-from autograd.util import getval
 
 
 class GraphInputLayer(object):

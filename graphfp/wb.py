@@ -1,5 +1,5 @@
-from pyflatten import flatten
 import autograd.numpy.random as npr
+from pyflatten import flatten
 
 
 class WeightsAndBiases(dict):

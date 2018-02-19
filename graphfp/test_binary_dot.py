@@ -1,12 +1,15 @@
 import numpy
+
+import autograd.numpy as np
 import pyximport
-pyximport.install(setup_args={"include_dirs": numpy.get_include()},
-                  reload_support=True)
+from autograd.util import check_grads
 
 from .binary_dot import csr_binary_dot_left, csr_binary_dot_right
 from .binary_matrix_utils import binary_matrix_to_sparse_rows
-import autograd.numpy as np
-from autograd.util import check_grads
+
+pyximport.install(setup_args={"include_dirs": numpy.get_include()},
+                  reload_support=True)
+
 
 binmat = np.array([[1, 0, 0],
                    [0, 0, 1],

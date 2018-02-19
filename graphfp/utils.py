@@ -1,8 +1,10 @@
-from random import sample
-from .layers import GraphInputLayer
 import math
-from .wb import WeightsAndBiases
+from random import sample
+
 import autograd.numpy as np
+
+from .layers import GraphInputLayer
+from .wb import WeightsAndBiases
 
 
 def train_test_split(graphs, test_fraction=0.2):

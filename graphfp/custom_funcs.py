@@ -1,7 +1,8 @@
-import networkx as nx
 import math
-import autograd.numpy as np
 from random import sample
+
+import autograd.numpy as np
+import networkx as nx
 
 
 def make_random_graph(nodes, n_edges, features_dict):

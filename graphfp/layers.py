@@ -1,11 +1,13 @@
+import gc
+from collections import defaultdict
+
+import autograd.numpy.random as npr
 from autograd import numpy as np
 from autograd.core import getval
-import autograd.numpy.random as npr
-from .wb import WeightsAndBiases
-from collections import defaultdict
-from .nonlinearity import relu
+
 from .binary_dot import csr_binary_dot_left
-import gc
+from .nonlinearity import relu
+from .wb import WeightsAndBiases
 
 
 class GraphInputLayer(object):

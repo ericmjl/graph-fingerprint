@@ -1,5 +1,5 @@
-from pyflatten import flatten
 import autograd.numpy as np
+from pyflatten import flatten
 
 
 def sgd(gradfunc, wb, callback=None, num_iters=200,
